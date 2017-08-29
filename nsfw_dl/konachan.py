@@ -22,44 +22,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
-
-from .errors import *
-from .tags import *
+from .generic import GenericRandom, GenericSearch
 
 
-__all__ = ['konachan_random', 'konachan_search']
+class KonachanRandom(GenericRandom):
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    def prepare_url(self, args):
+        return "https://konachan.com/post/random", {}, {}
 
 
-async def konachan_random(session):
-    """Returns a random image from konachan."""
-    try:
-        query = "https://konachan.com/post/random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="highres").get("href")
-        return image
-    except Exception as e:
-        str(e)
-        return None
+class KonachanSearch(GenericSearch):
+    reqtype = "get"
+    data_format = "json"
 
-
-async def konachan_search(searchtags, session):
-    """Returns a specific image from konachan."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = "https://konachan.com/post.json?page=dapi&s=post&q=index" \
-                    "&tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+    def prepare_url(self, args):
+        return f"https://konachan.com/post.json?page=dapi&s=post&q=index&tags={args}", {}, {}

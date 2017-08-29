@@ -22,20 +22,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from .generic import GenericRandom, GenericSearch
+import random
+
+from .errors import NoResultsFound
 
 
-class DanbooruRandom(GenericRandom):
-    reqtype = "get"
-    data_format = "bs4/html"
-
-    def prepare_url(self, args):
-        return "http://danbooru.donmai.us/posts/random", {}, {}
-
-
-class DanbooruSearch(GenericSearch):
-    reqtype = "get"
-    data_format = "json"
+class GenericRandom:
+    """ generic random base class """
 
     def prepare_url(self, args):
-        return f"http://danbooru.donmai.us/posts.json?tags={args}", {}, {}
+        # this function is supposed to be overloaded.
+        pass
+
+    def get_image(self, data):
+        return data.find(id="highres").get("href")
+
+
+class GenericSearch:
+    """ generic random base class """
+
+    def prepare_url(self, args):
+        # this function is supposed to be overloaded.
+        pass
+
+    def get_image(self, data):
+        if data:
+            return random.choice(data)['file_url']
+        raise NoResultsFound

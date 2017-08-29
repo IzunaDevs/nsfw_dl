@@ -22,30 +22,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-import random
-
-from .errors import NoResultsFound
+from .generic import GenericRandom, GenericSearch
 
 
-class YandereRandom:
+class YandereRandom(GenericRandom):
     reqtype = "get"
     data_format = "bs4/html"
 
     def prepare_url(self, args):
         return "https://yande.re/post/random", {}, {}
 
-    def get_image(self, data):
-        return data.find(id="highres").get("href")
 
-
-class YandereSearch:
+class YandereSearch(GenericSearch):
     reqtype = "get"
     data_format = "json"
 
     def prepare_url(self, args):
         return f"https://yande.re/post.json?tags={args}", {}, {}
-
-    def get_image(self, data):
-        if data:
-            return random.choice(data)['file_url']
-        raise NoResultsFound

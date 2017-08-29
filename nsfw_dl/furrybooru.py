@@ -22,48 +22,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
-
-from .errors import *
-from .tags import *
+from .generic import GenericRandom, GenericSearch
 
 
-__all__ = ['furrybooru_random', 'furrybooru_search']
+class FurrybooruRandom(GenericRandom):
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    def prepare_url(self, args):
+        return "http://furry.booru.org/index.php?page=post&s=random", {}, {}
 
 
-async def furrybooru_random(session):
-    """Returns a random image from furrybooru."""
-    try:
-        query = "http://furry.booru.org/index.php?page=post&s=random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="image").get("src")
-        return image
-    except Exception as e:
-        str(e)
-        return None
+class FurrybooruSearch(GenericSearch):
+    reqtype = "get"
+    data_format = "bs4/xml"
 
-
-async def furrybooru_search(searchtags, session):
-    """Returns a specific image from furrybooru."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = (
-                "http://furry.booru.org/index.php?page=post&s=list&tags=" +
-                searchtags)
-            page = await session.get(query)
-            page = await page.text()
-            soup = BeautifulSoup(page, 'lxml')
-            if int(soup.find('posts')['count']) > 0:
-                imagelist = [tag.get('file_url') for tag in soup.find_all(
-                    'post')]
-                return imagelist
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+    def prepare_url(self, args):
+        return f"http://furry.booru.org/index.php?page=post&s=list&tags=args}", {}, {}

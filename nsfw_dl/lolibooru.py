@@ -22,43 +22,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
-
-from .errors import *
-from .tags import *
+from .generic import GenericRandom, GenericSearch
 
 
-__all__ = ['lolibooru_random', 'lolibooru_search']
+class LolibooruRandom(GenericRandom):
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    def prepare_url(self, args):
+        return "https://lolibooru.moe/post/random/", {}, {}
 
 
-async def lolibooru_random(session):
-    """Returns a random image from lolibooru."""
-    try:
-        query = "https://lolibooru.moe/post/random/"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="image").get("src")
-        image = image.replace(' ', '%20')
-        return image
-    except Exception as e:
-        str(e)
-        return None
+class LolibooruSearch(GenericSearch):
+    reqtype = "get"
+    data_format = "json"
 
-
-async def lolibooru_search(searchtags, session):
-    """Returns a specific image from lolibooru."""
-    if isinstance(searchtags, str):
-        try:
-            query = "https://lolibooru.moe/post/index.json?tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+    def prepare_url(self, args):
+        return f"https://lolibooru.moe/post/index.json?tags={args}", {}, {}
