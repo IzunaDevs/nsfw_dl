@@ -22,26 +22,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
+from bs4 import BeautifulSoup
 
-__all__ = ['NoResultsFound', 'NoXMLParser']
-
-
-class BaseErrors(Exception):
-    """
-    Base Exception Class.
-    """
-    pass
+from .errors import *
+from .tags import *
 
 
-class NoResultsFound(BaseErrors):
-    """
-    Thrown when the search found no results for the search.
-    """
-    pass
+__all__ = ['nhentai_random']
 
 
-class NoXMLParser(BaseErrors):
-    """
-    Thrown when there is no xml parser.
-    """
-    pass
+async def nhentai_random(session):
+    """Returns a random image from nhentai."""
+    url = "http://nhentai.net/random/"
+    r = await session.get(url)
+    return r.url

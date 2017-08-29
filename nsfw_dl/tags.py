@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2016-2017 AraHaan
+Copyright (c) 2016 AraHaan
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -22,26 +22,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
+__all__ = ['encode_tag']
 
-__all__ = ['NoResultsFound', 'NoXMLParser']
 
-
-class BaseErrors(Exception):
+def encode_tag(tagstoclean):
     """
-    Base Exception Class.
+    Cleans up non ansii characters
+    in the Search Tags.
     """
-    pass
-
-
-class NoResultsFound(BaseErrors):
-    """
-    Thrown when the search found no results for the search.
-    """
-    pass
-
-
-class NoXMLParser(BaseErrors):
-    """
-    Thrown when there is no xml parser.
-    """
-    pass
+    return (tagstoclean.format(
+        ' ', '_').format('(', '%28').format(')', '%29'))
