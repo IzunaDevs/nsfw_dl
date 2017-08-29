@@ -38,4 +38,4 @@ class FurrybooruSearch(GenericSearch):
     data_format = "bs4/xml"
 
     def prepare_url(self, args):
-        return f"http://furry.booru.org/index.php?page=post&s=list&tags=args}", {}, {}
+        return f"http://furry.booru.org/index.php?page=post&s=list&tags={args}", {}, {}
