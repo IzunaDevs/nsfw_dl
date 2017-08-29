@@ -61,4 +61,4 @@ async def yandere_search(searchtags, session):
             str(e)
             return None
     else:
-        return -1  # searchtags is not a string.
+        return -1
