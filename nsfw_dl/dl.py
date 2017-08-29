@@ -36,8 +36,7 @@ from .errors import UnsupportedDataFormat, NoLoader
 
 
 LOADERS = {
-
-
+    "yandere": ["YandereRandom", "YandereSearch"],
 }
 
 
@@ -94,7 +93,7 @@ class NSFWDL:
 
     def load_default(self):
         for loader, names in LOADERS.items():
-            lib = importlib.import_module(loader)
+            lib = importlib.import_module(f".{loader}")
             for name, loader_class in [(name, getattr(lib, name))
                                        for name in names]:
                 load_obj = loader_class()
