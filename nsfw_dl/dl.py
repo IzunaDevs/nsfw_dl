@@ -50,7 +50,7 @@ class NSFWDL:
         self.loaders[name] = downloader
 
     @staticmethod
-    def parse_args(self, args):
+    def parse_args(args):
         return quote(args)
 
     def __getattr__(self, item):
