@@ -22,7 +22,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-
 import random
 
 from .errors import NoResultsFound
@@ -49,5 +48,4 @@ class YandereSearch:
     def get_image(self, data):
         if data:
             return random.choice(data)['file_url']
-
         raise NoResultsFound

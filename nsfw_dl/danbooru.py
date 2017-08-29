@@ -22,43 +22,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
+import random
 
-from .errors import *
-from .tags import *
-
-
-__all__ = ['danbooru_random', 'danbooru_search']
+from .errors import NoResultsFound
 
 
-async def danbooru_random(session):
-    """Returns a random image from danbooru."""
-    try:
-        query = "http://danbooru.donmai.us/posts/random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="image").get("src")
-        return image
-    except Exception as e:
-        str(e)
-        return None
+class DanbooruRandom:
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    def prepare_url(self, args):
+        return "http://danbooru.donmai.us/posts/random", {}, {}
+
+    def get_image(self, data):
+        # in case highres and href does not exist.
+        # return data.find(id="image").get("src")
+        return data.find(id="highres").get("href")
 
 
-async def danbooru_search(searchtags, session):
-    """Returns a specific image from danbooru."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = "http://danbooru.donmai.us/posts.json?tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+class DanbooruSearch:
+    reqtype = "get"
+    data_format = "json"
+
+    def prepare_url(self, args):
+        return f"http://danbooru.donmai.us/posts.json?tags={args}", {}, {}
+
+    def get_image(self, data):
+        if data:
+            return random.choice(data)['file_url']
+        raise NoResultsFound
