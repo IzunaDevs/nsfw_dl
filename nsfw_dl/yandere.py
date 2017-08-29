@@ -22,43 +22,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
 
-from .errors import *
-from .tags import *
+import random
 
-
-__all__ = ['yandere_random', 'yandere_search']
+from .errors import NoResultsFound
 
 
-async def yandere_random(session):
-    """Returns a random image from yande."""
-    try:
-        query = "https://yande.re/post/random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="highres").get("href")
-        return image
-    except Exception as e:
-        str(e)
-        return None
+class YandereRandom:
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    def prepare_url(self, args):
+        return "https://yande.re/post/random"
+
+    def get_image(self, data):
+        return data.find(id="highres").get("href")
 
 
-async def yandere_search(searchtags, session):
-    """Returns a specific image from yandere."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = "https://yande.re/post.json?tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1  # searchtags is not a string.
+class YandereSearch:
+    reqtype = "get"
+    data_format = "json"
+
+    def prepare_url(self, args):
+        return f"https://yande.re/post.json?tags={args}"
+
+    def get_image(self, data):
+        if data:
+            return random.choice(data)['file_url']
+
+        raise NoResultsFound

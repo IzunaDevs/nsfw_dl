@@ -33,6 +33,13 @@ class BaseErrors(Exception):
     pass
 
 
+class NoLoader(BaseErrors):
+    """
+    Thrown when there is no such loader in the NSFWDL instance
+    """
+    pass
+
+
 class NoResultsFound(BaseErrors):
     """
     Thrown when the search found no results for the search.
