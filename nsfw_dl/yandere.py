@@ -33,7 +33,7 @@ class YandereRandom:
     data_format = "bs4/html"
 
     def prepare_url(self, args):
-        return "https://yande.re/post/random"
+        return "https://yande.re/post/random", {}, {}
 
     def get_image(self, data):
         return data.find(id="highres").get("href")
@@ -44,7 +44,7 @@ class YandereSearch:
     data_format = "json"
 
     def prepare_url(self, args):
-        return f"https://yande.re/post.json?tags={args}"
+        return f"https://yande.re/post.json?tags={args}", {}, {}
 
     def get_image(self, data):
         if data:
