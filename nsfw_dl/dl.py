@@ -37,6 +37,10 @@ from .errors import UnsupportedDataFormat, NoLoader
 
 LOADERS = {
     "yandere": ["YandereRandom", "YandereSearch"],
+    "lolibooru": ["LolibooruRandom", "LolibooruSearch"],
+    "konachan": ["KonachanRandom", "KonachanSearch"],
+    "furrybooru": ["FurrybooruRandom", "FurrybooruSearch"],
+    "danbooru": ["DanbooruRandom", "DanbooruSearch"],
 }
 
 
