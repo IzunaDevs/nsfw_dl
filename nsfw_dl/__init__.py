@@ -22,10 +22,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-# _nsfw_code was removed.
-# from ._nsfw_code import *
-from . import yandere
 from . import errors
+# maybe rename this to Client?
+from . import yandere
 
 
 __title__ = 'nsfw_dl'
