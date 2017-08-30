@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -22,20 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from .generic import GenericRandom, GenericSearch
+from ..generic import GenericRandom, GenericSearch
 
 
-class DanbooruRandom(GenericRandom):
+class KonachanRandom(GenericRandom):
+    """
+    Gets a random image from konachan.
+    """
     reqtype = "get"
     data_format = "bs4/html"
 
-    def prepare_url(self, args):
-        return "http://danbooru.donmai.us/posts/random", {}, {}
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return "https://konachan.com/post/random", {}, {}
 
 
-class DanbooruSearch(GenericSearch):
+class KonachanSearch(GenericSearch):
+    """
+    Gets a random image with a specific tag from konachan.
+    """
     reqtype = "get"
     data_format = "json"
 
-    def prepare_url(self, args):
-        return f"http://danbooru.donmai.us/posts.json?tags={args}", {}, {}
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return f"https://konachan.com/post.json?page=dapi&s=post&q=index&tags={args}", {}, {}

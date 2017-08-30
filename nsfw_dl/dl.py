@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -35,6 +34,7 @@ from bs4 import BeautifulSoup
 from .errors import UnsupportedDataFormat, NoLoader
 
 
+__all__ = ['NSFWDL']
 LOADERS = {
     "yandere": ["YandereRandom", "YandereSearch"],
     "lolibooru": ["LolibooruRandom", "LolibooruSearch"],
@@ -45,24 +45,35 @@ LOADERS = {
 
 
 class NSFWDL:
+    """
+    Main class.
+    """
     def __init__(self, session=None, loop=None, json_loader=json.loads):
         self.session = session or aiohttp.ClientSession(loop=loop)
         self.json_loader = json_loader
         self.loaders = {}
 
     def add_loader(self, name, downloader):
+        """
+        adds a loader to get images from.
+        """
         self.loaders[name] = downloader
 
     @staticmethod
     def parse_args(args):
+        """
+        parses args.
+        """
         return quote(args)
 
     def __getattr__(self, item):
         if item in self.loaders:
             return self.loaders[item]
-        return super().__getattr__(item)
 
     async def download(self, name, args="", download=False):
+        """
+        downloads or returns the image urls based on the loaders.
+        """
         if name not in self.loaders:
             raise NoLoader(f"No loader named {name!r}")
 
@@ -71,7 +82,7 @@ class NSFWDL:
         args = self.parse_args(args)
         url, data, headers = loader.prepare_url(args=args)
         async with getattr(self.session, loader.reqtype)(
-                url, data=data, headers=headers) as resp:
+            url, data=data, headers=headers) as resp:
             assert 200 <= resp.status_code < 300
 
             if loader.data_format == "bs4/html":
@@ -96,8 +107,11 @@ class NSFWDL:
         return img_url
 
     def load_default(self):
+        """
+        loads the loaders.
+        """
         for loader, names in LOADERS.items():
-            lib = importlib.import_module(f".{loader}")
+            lib = importlib.import_module(f".loaders.{loader}")
             for name, loader_class in [(name, getattr(lib, name))
                                        for name in names]:
                 load_obj = loader_class()

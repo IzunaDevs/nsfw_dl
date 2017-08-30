@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -23,7 +22,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
 
-__all__ = ['NoResultsFound', 'NoXMLParser']
+__all__ = ['NoLoader', 'NoResultsFound', 'NoXMLParser',
+           'UnsupportedDataFormat']
 
 
 class BaseErrors(Exception):
@@ -50,5 +50,11 @@ class NoResultsFound(BaseErrors):
 class NoXMLParser(BaseErrors):
     """
     Thrown when there is no xml parser.
+    """
+    pass
+
+class UnsupportedDataFormat(BaseErrors):
+    """
+    Thrown when there is an unsupported format.
     """
     pass

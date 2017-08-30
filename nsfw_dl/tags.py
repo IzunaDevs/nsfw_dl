@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -22,13 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-__all__ = ['encode_tag']
+__all__ = ['CleanTag']
 
 
-def encode_tag(tagstoclean):
-    """
-    Cleans up non ansii characters
-    in the Search Tags.
-    """
-    return (tagstoclean.format(
-        ' ', '_').format('(', '%28').format(')', '%29'))
+class CleanTag:
+    def __init__(self, tag):
+        self.tag = tag
+        self.clean()
+
+    def clean(self):
+        return (self.tag.format(
+                ' ', '_').format('(', '%28').format(')', '%29'))

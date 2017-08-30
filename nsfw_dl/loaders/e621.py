@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -28,37 +27,34 @@ from .errors import *
 from .tags import *
 
 
-__all__ = ['xbooru_random', 'xbooru_search']
+__all__ = ['e621_random', 'e621_search']
 
 
-async def xbooru_random(session):
-    """Returns a random image from xbooru."""
+async def e621_random(session):
+    """Returns a random image from e621."""
     try:
-        query = "http://xbooru.com/index.php?page=post&s=random"
+        query = "https://e621.net/post/random"
         page = await session.get(query)
         page = await page.text()
         soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="image").get("src")
+        image = soup.find(id="highres").get("href")
         return image
     except Exception as e:
         str(e)
         return None
 
 
-async def xbooru_search(searchtags, session):
-    """Returns a specific image from xbooru."""
+async def e621_search(searchtags, session):
+    """Returns a specific image from e621."""
     if isinstance(searchtags, str):
         try:
             searchtags = encode_tag(searchtags)
-            query = "http://xbooru.com/index.php?page=dapi&s=post&q=index" \
-                    "&tags=" + searchtags
+            query = "https://e621.net/post/index.json?page=dapi&s=post&q" \
+                    "=index&tags=" + searchtags
             page = await session.get(query)
-            page = await page.text()
-            soup = BeautifulSoup(page, 'lxml')
-            if int(soup.find('posts')['count']) > 0:
-                imagelist = [tag.get('file_url') for tag in soup.find_all(
-                    'post')]
-                return imagelist
+            json = await page.json()
+            if not json == []:
+                return json
             else:
                 raise NoResultsFound('No images found.')
         except Exception as e:

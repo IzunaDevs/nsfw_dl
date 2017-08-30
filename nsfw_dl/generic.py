@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -27,25 +26,46 @@ import random
 from .errors import NoResultsFound
 
 
+__all__ = ['GenericRandom', 'GenericSearch']
+
+
 class GenericRandom:
     """ generic random base class """
 
-    def prepare_url(self, args):
-        # this function is supposed to be overloaded.
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
         pass
 
-    def get_image(self, data):
-        return data.find(id="highres").get("href")
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
+        image = data.find(id="highres").get("href")
+        # seems all dont have highres based on my old sources.
+        if image is None:
+            image = data.find(id="image").get("src")
+        return image
 
 
 class GenericSearch:
-    """ generic random base class """
+    """ generic search base class """
 
-    def prepare_url(self, args):
-        # this function is supposed to be overloaded.
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
         pass
 
-    def get_image(self, data):
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
         if data:
             return random.choice(data)['file_url']
         raise NoResultsFound

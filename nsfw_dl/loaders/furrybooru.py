@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -22,17 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from bs4 import BeautifulSoup
-
-from .errors import *
-from .tags import *
+from ..generic import GenericRandom, GenericSearch
 
 
-__all__ = ['tsumino_random']
+class FurrybooruRandom(GenericRandom):
+    """
+    Gets a random image from furrybooru.
+    """
+    reqtype = "get"
+    data_format = "bs4/html"
+
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return "http://furry.booru.org/index.php?page=post&s=random", {}, {}
 
 
-async def tsumino_random(session):
-    """Returns a random image from tsumino."""
-    url = "http://www.tsumino.com/Browse/Random"
-    r = await session.get(url)
-    return r.url
+class FurrybooruSearch(GenericSearch):
+    """
+    Gets a random image with a specific tag from furrybooru.
+    """
+    reqtype = "get"
+    data_format = "bs4/xml"
+
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return f"http://furry.booru.org/index.php?page=post&s=list&tags={args}", {}, {}

@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -22,20 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from .generic import GenericRandom, GenericSearch
+from ..generic import GenericRandom, GenericSearch
 
 
-class FurrybooruRandom(GenericRandom):
+class XbooruRandom(GenericRandom):
+    """
+    Gets a random image from yandere.
+    """
     reqtype = "get"
     data_format = "bs4/html"
 
-    def prepare_url(self, args):
-        return "http://furry.booru.org/index.php?page=post&s=random", {}, {}
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return "http://xbooru.com/index.php?page=post&s=random", {}, {}
 
 
-class FurrybooruSearch(GenericSearch):
+class XbooruSearch(GenericSearch):
+    """
+    Gets a random image with a specific tag from yandere.
+    """
     reqtype = "get"
     data_format = "bs4/xml"
 
-    def prepare_url(self, args):
-        return f"http://furry.booru.org/index.php?page=post&s=list&tags={args}", {}, {}
+    @staticmethod
+    def prepare_url(args):
+        """
+        prepares the request url.
+        """
+        return f"http://xbooru.com/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}

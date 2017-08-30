@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -28,38 +27,11 @@ from .errors import *
 from .tags import *
 
 
-__all__ = ['e621_random', 'e621_search']
+__all__ = ['nhentai_random']
 
 
-async def e621_random(session):
-    """Returns a random image from e621."""
-    try:
-        query = "https://e621.net/post/random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="highres").get("href")
-        return image
-    except Exception as e:
-        str(e)
-        return None
-
-
-async def e621_search(searchtags, session):
-    """Returns a specific image from e621."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = "https://e621.net/post/index.json?page=dapi&s=post&q" \
-                    "=index&tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+async def nhentai_random(session):
+    """Returns a random image from nhentai."""
+    url = "http://nhentai.net/random/"
+    r = await session.get(url)
+    return r.url

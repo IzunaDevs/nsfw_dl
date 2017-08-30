@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -22,20 +21,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-from .generic import GenericRandom, GenericSearch
+from bs4 import BeautifulSoup
+
+from .errors import *
+from .tags import *
 
 
-class KonachanRandom(GenericRandom):
-    reqtype = "get"
-    data_format = "bs4/html"
-
-    def prepare_url(self, args):
-        return "https://konachan.com/post/random", {}, {}
+__all__ = ['hbrowse_random']
 
 
-class KonachanSearch(GenericSearch):
-    reqtype = "get"
-    data_format = "json"
+async def hbrowse_random(session):
+    """Returns a random image from hbrowse."""
+    url = "http://www.hbrowse.com/random"
+    r = await session.get(url)
+    return r.url
 
-    def prepare_url(self, args):
-        return f"https://konachan.com/post.json?page=dapi&s=post&q=index&tags={args}", {}, {}

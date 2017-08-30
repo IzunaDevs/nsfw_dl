@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -28,13 +27,13 @@ from .errors import *
 from .tags import *
 
 
-__all__ = ['gelbooru_random', 'gelbooru_search']
+__all__ = ['rule34_random', 'rule34_search']
 
 
-async def gelbooru_random(session):
-    """Returns a random image from gelbooru."""
+async def rule34_random(session):
+    """Returns a random image from rule34."""
     try:
-        query = "http://www.gelbooru.com/index.php?page=post&s=random"
+        query = "http://rule34.xxx/index.php?page=post&s=random"
         page = await session.get(query)
         page = await page.text()
         soup = BeautifulSoup(page, 'html.parser')
@@ -45,12 +44,12 @@ async def gelbooru_random(session):
         return None
 
 
-async def gelbooru_search(searchtags, session):
-    """Returns a specific image from gelbooru."""
+async def rule34_search(searchtags, session):
+    """Returns a specific image from rule34."""
     if isinstance(searchtags, str):
         try:
             searchtags = encode_tag(searchtags)
-            query = "http://gelbooru.com/index.php?page=dapi&s=post&q=index" \
+            query = "https://rule34.xxx/index.php?page=dapi&s=post&q=index" \
                     "&tags=" + searchtags
             page = await session.get(query)
             page = await page.text()

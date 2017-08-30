@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 The MIT License (MIT)
 
@@ -28,38 +27,11 @@ from .errors import *
 from .tags import *
 
 
-__all__ = ['tbib_random', 'tbib_search']
+__all__ = ['tsumino_random']
 
 
-async def tbib_random(session):
-    """Returns a random image from tbib."""
-    try:
-        query = "http://www.tbib.org/index.php?page=post&s=random"
-        page = await session.get(query)
-        page = await page.text()
-        soup = BeautifulSoup(page, 'html.parser')
-        image = soup.find(id="image").get("src")
-        return image
-    except Exception as e:
-        str(e)
-        return None
-
-
-async def tbib_search(searchtags, session):
-    """Returns a specific image from tbib."""
-    if isinstance(searchtags, str):
-        try:
-            searchtags = encode_tag(searchtags)
-            query = "http://www.tbib.org/index.php?page=dapi&s=post&q=index" \
-                    "&tags=" + searchtags
-            page = await session.get(query)
-            json = await page.json()
-            if not json == []:
-                return json
-            else:
-                raise NoResultsFound('No images found.')
-        except Exception as e:
-            str(e)
-            return None
-    else:
-        return -1
+async def tsumino_random(session):
+    """Returns a random image from tsumino."""
+    url = "http://www.tsumino.com/Browse/Random"
+    r = await session.get(url)
+    return r.url
