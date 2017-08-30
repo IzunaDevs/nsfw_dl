@@ -6,7 +6,7 @@ It uses Python 3.5+ syntax.
 
 ## Known Issues
 
-It is known that the ``drunkenpumken_search`` function may not work right.
+It is known that the ``drunkenpumken`` does not have an working search (I need to figure out how to send an tag to the api if they have one to get the same result as most of the other search classes).
 
 Also I could not figure out an search for ``nhentai``, ``tsumino``, and ``hbrowse``.
 
