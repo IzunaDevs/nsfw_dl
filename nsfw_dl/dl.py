@@ -1,27 +1,7 @@
 """
-The MIT License (MIT)
-
-Copyright (c) 2016-2017 AraHaan
-
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
+Read the license at:
+https://github.com/AraHaan/nsfw_dl/blob/master/LICENSE
 """
-
 import importlib
 import io
 import json
@@ -36,11 +16,30 @@ from .errors import UnsupportedDataFormat, NoLoader
 
 __all__ = ['NSFWDL']
 LOADERS = {
-    "yandere": ["YandereRandom", "YandereSearch"],
-    "lolibooru": ["LolibooruRandom", "LolibooruSearch"],
-    "konachan": ["KonachanRandom", "KonachanSearch"],
-    "furrybooru": ["FurrybooruRandom", "FurrybooruSearch"],
-    "danbooru": ["DanbooruRandom", "DanbooruSearch"],
+    "danbooru": ["DanbooruRandom"],
+    "danbooru_search": ["DanbooruSearch"],
+    "drunkenpumken": ["DrunkenpumkenRandom"],
+    "e621": ["E621Random"],
+    "e621_search": ["E621Search"],
+    "furrybooru": ["FurrybooruRandom"],
+    "furrybooru_search": ["FurrybooruSearch"],
+    "gelbooru": ["GelbooruRandom"],
+    "gelbooru_search": ["GelbooruSearch"],
+    "hbrowse": ["HbrowseRandom"],
+    "konachan": ["KonachanRandom"],
+    "konachan_search": ["KonachanSearch"],
+    "lolibooru": ["LolibooruRandom"],
+    "lolibooru_search": ["LolibooruSearch"],
+    "nhentai": ["NhentaiRandom"],
+    "rule34": ["Rule34Random"],
+    "rule34_search": ["Rule34Search"],
+    "tbib": ["TbibRandom"],
+    "tbib_search": ["TbibSearch"],
+    "tsumino": ["TsuminoRandom"],
+    "xbooru": ["XbooruRandom"],
+    "xbooru_search": ["XbooruSearch"],
+    "yandere": ["YandereRandom"],
+    "yandere_search": ["YandereSearch"],
 }
 
 
@@ -70,12 +69,16 @@ class NSFWDL:
         if item in self.loaders:
             return self.loaders[item]
 
-    async def download(self, name, args="", download=False):
+    async def download(self, name, args="", download=False, search=False):
         """
         downloads or returns the image urls based on the loaders.
         """
         if name not in self.loaders:
             raise NoLoader(f"No loader named {name!r}")
+
+        # hopefully separate searches.
+        if search:
+            name + "_search"
 
         loader = self.loaders[name]
 
@@ -90,14 +93,22 @@ class NSFWDL:
 
             elif loader.data_format == "bs4/xml":
                 reqdata = BeautifulSoup(await resp.text(), "lxml")
+                # transform xml to list.
+                reqdata = loader.xml_to_json(reqdata)
 
             elif loader.data_format == "json":
                 reqdata = await resp.json(loads=self.json_loader)
 
+            # return type is an url.
+            elif loader.data_format == "aiohttp/url":
+                reqdata = loader.data_format
             else:
                 raise UnsupportedDataFormat(loader.data_format)
 
-        img_url = loader.get_image(reqdata)
+        if reqdata == "aiohttp/url":
+            img_url = resp.url
+        else:
+            img_url = loader.get_image(reqdata)
 
         if download:
             async with self.session.get(url) as resp:
