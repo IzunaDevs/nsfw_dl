@@ -32,4 +32,5 @@ class E621Search(GenericSearch):
         """
         prepares the request url.
         """
-        return f"https://e621.net/post/index.json?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"https://e621.net/post/index.json"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

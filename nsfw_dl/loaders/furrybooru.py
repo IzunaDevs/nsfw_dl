@@ -32,4 +32,5 @@ class FurrybooruSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"http://furry.booru.org/index.php?page=post&s=list&tags={args}", {}, {}
+        return (f"http://furry.booru.org/index.php"
+                f"?page=post&s=list&tags={args}", {}, {})

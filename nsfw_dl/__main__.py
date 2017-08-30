@@ -9,7 +9,7 @@ def main(argv):
     """
     Main entrypoint to nsfw_dl commandline.
     """
-    pass
+    type(argv)
 
 
 if __name__ == '__main__':

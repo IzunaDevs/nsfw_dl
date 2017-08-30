@@ -32,4 +32,5 @@ class GelbooruSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"http://gelbooru.com/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"http://gelbooru.com/index.php"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

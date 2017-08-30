@@ -32,4 +32,5 @@ class XbooruSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"http://xbooru.com/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"http://xbooru.com/index.php"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

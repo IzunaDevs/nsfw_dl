@@ -32,4 +32,5 @@ class TbibSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"http://www.tbib.org/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"http://www.tbib.org/index.php"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

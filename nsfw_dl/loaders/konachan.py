@@ -32,4 +32,5 @@ class KonachanSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"https://konachan.com/post.json?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"https://konachan.com/post.json"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

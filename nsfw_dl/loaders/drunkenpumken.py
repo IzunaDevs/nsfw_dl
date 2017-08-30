@@ -17,7 +17,8 @@ class DrunkenpumkenRandom(GenericRandom):
         """
         prepares the request url.
         """
-        return "http://drunkenpumken.booru.org/index.php?page=post&s=random", {}, {}
+        return ("http://drunkenpumken.booru.org/"
+                "index.php?page=post&s=random", {}, {})
 
 
 # WHERE IS THE FUCKIN API DOCS TO DRUNKENPUMKEN TO SEARCH TAGS???
@@ -33,4 +34,5 @@ class DrunkenpumkenSearch(GenericSearch):
         """
         prepares the request url.
         """
-        return f"http://drunkenpumken.booru.org/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"http://drunkenpumken.booru.org/index.php"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

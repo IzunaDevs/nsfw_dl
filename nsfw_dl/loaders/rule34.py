@@ -32,4 +32,5 @@ class Rule34Search(GenericSearch):
         """
         prepares the request url.
         """
-        return f"https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags={args}", {}, {}
+        return (f"https://rule34.xxx/index.php"
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})

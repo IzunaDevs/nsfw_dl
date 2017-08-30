@@ -34,6 +34,7 @@ class NoXMLParser(BaseErrors):
     """
     pass
 
+
 class UnsupportedDataFormat(BaseErrors):
     """
     Thrown when there is an unsupported format.
