@@ -4,6 +4,10 @@ This is an discord library that works with aiohttp and async.
 
 It uses Python 3.5+ syntax.
 
+## Documentation
+
+There is no documentation as of yet for usage of ``nsfw_dl``.
+
 ## Known Issues
 
 It is known that ``drunkenpumken`` does not have an working search (I need to figure out how to send an tag to the api if they have one to get the same result as most of the other search classes).
