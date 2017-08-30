@@ -16,30 +16,20 @@ from .errors import UnsupportedDataFormat, NoLoader
 
 __all__ = ['NSFWDL']
 LOADERS = {
-    "danbooru": ["DanbooruRandom"],
-    "danbooru_search": ["DanbooruSearch"],
+    "danbooru": ["DanbooruRandom", "DanbooruSearch"],
     "drunkenpumken": ["DrunkenpumkenRandom"],
-    "e621": ["E621Random"],
-    "e621_search": ["E621Search"],
-    "furrybooru": ["FurrybooruRandom"],
-    "furrybooru_search": ["FurrybooruSearch"],
-    "gelbooru": ["GelbooruRandom"],
-    "gelbooru_search": ["GelbooruSearch"],
+    "e621": ["E621Random", "E621Search"],
+    "furrybooru": ["FurrybooruRandom", "FurrybooruSearch"],
+    "gelbooru": ["GelbooruRandom", "GelbooruSearch"],
     "hbrowse": ["HbrowseRandom"],
-    "konachan": ["KonachanRandom"],
-    "konachan_search": ["KonachanSearch"],
-    "lolibooru": ["LolibooruRandom"],
-    "lolibooru_search": ["LolibooruSearch"],
+    "konachan": ["KonachanRandom", "KonachanSearch"],
+    "lolibooru": ["LolibooruRandom", "LolibooruSearch"],
     "nhentai": ["NhentaiRandom"],
-    "rule34": ["Rule34Random"],
-    "rule34_search": ["Rule34Search"],
-    "tbib": ["TbibRandom"],
-    "tbib_search": ["TbibSearch"],
+    "rule34": ["Rule34Random", "Rule34Search"],
+    "tbib": ["TbibRandom", "TbibSearch"],
     "tsumino": ["TsuminoRandom"],
-    "xbooru": ["XbooruRandom"],
-    "xbooru_search": ["XbooruSearch"],
-    "yandere": ["YandereRandom"],
-    "yandere_search": ["YandereSearch"],
+    "xbooru": ["XbooruRandom", "XbooruSearch"],
+    "yandere": ["YandereRandom", "YandereSearch"],
 }
 
 
@@ -75,10 +65,6 @@ class NSFWDL:
         """
         if name not in self.loaders:
             raise NoLoader(f"No loader named {name!r}")
-
-        # hopefully separate searches.
-        if search:
-            name + "_search"
 
         loader = self.loaders[name]
 
