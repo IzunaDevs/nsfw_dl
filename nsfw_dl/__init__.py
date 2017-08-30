@@ -11,7 +11,7 @@ __title__ = 'nsfw_dl'
 __author__ = 'Decorater'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2016 Decorater'
-__version__ = '0.0.1'
+__version__ = '0.1.0a'
 __build__ = 0x000001
 __all__ = (errors.__all__ + dl.__all__ + generic.__all__)
 
