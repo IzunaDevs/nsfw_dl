@@ -59,7 +59,7 @@ class NSFWDL:
         if item in self.loaders:
             return self.loaders[item]
 
-    async def download(self, name, args="", download=False, search=False):
+    async def download(self, name, args="", download=False):
         """
         downloads or returns the image urls based on the loaders.
         """
