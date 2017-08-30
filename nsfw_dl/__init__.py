@@ -8,9 +8,9 @@ from . import generic
 
 
 __title__ = 'nsfw_dl'
-__author__ = 'AraHaan'
+__author__ = 'IzunaDevs'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2016 -2017 AraHaan'
+__copyright__ = 'Copyright 2017 IzunaDevs'
 __version__ = '0.1.0a'
 __build__ = 0x000100
 __all__ = (errors.__all__ + dl.__all__ + generic.__all__)
