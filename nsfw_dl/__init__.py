@@ -8,11 +8,11 @@ from . import generic
 
 
 __title__ = 'nsfw_dl'
-__author__ = 'Decorater'
+__author__ = 'AraHaan'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2016 Decorater'
+__copyright__ = 'Copyright 2016 -2017 AraHaan'
 __version__ = '0.1.0a'
-__build__ = 0x000001
+__build__ = 0x000100
 __all__ = (errors.__all__ + dl.__all__ + generic.__all__)
 
 NoLoader = errors.NoLoader
