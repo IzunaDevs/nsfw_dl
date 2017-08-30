@@ -1,6 +1,6 @@
 """
 Read the license at:
-https://github.com/AraHaan/nsfw_dl/blob/master/LICENSE
+https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import sys
 

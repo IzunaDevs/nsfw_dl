@@ -1,6 +1,6 @@
 """
 Read the license at:
-https://github.com/AraHaan/nsfw_dl/blob/master/LICENSE
+https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import importlib
 import io
@@ -86,12 +86,12 @@ class NSFWDL:
                 reqdata = await resp.json(loads=self.json_loader)
 
             # return type is an url.
-            elif loader.data_format == "aiohttp/url":
+            elif loader.data_format == "url":
                 reqdata = loader.data_format
             else:
                 raise UnsupportedDataFormat(loader.data_format)
 
-        if reqdata == "aiohttp/url":
+        if reqdata == "url":
             img_url = resp.url
         else:
             img_url = loader.get_image(reqdata)
