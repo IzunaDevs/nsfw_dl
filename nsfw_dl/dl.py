@@ -79,8 +79,6 @@ class NSFWDL:
 
             elif loader.data_format == "bs4/xml":
                 reqdata = BeautifulSoup(await resp.text(), "lxml")
-                # transform xml to list.
-                reqdata = loader.xml_to_json(reqdata)
 
             elif loader.data_format == "json":
                 reqdata = await resp.json(loads=self.json_loader)

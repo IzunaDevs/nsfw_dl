@@ -2,10 +2,9 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-from ..generic import GenericRandom
 
 
-class HbrowseRandom(GenericRandom):
+class HbrowseRandom:
     """
     Gets a random image from hbrowse.
     """
@@ -18,3 +17,13 @@ class HbrowseRandom(GenericRandom):
         prepares the request url.
         """
         return "http://www.hbrowse.com/random", {}, {}
+
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
+        image = data.find(id="highres").get("href")
+        if image is None:
+            image = data.find(id="image").get("src")
+        return image

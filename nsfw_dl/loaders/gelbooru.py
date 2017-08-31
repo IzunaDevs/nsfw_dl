@@ -2,10 +2,9 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-from ..generic import GenericRandom, GenericSearch
 
 
-class GelbooruRandom(GenericRandom):
+class GelbooruRandom:
     """
     Gets a random image from gelbooru.
     """
@@ -19,8 +18,18 @@ class GelbooruRandom(GenericRandom):
         """
         return "http://www.gelbooru.com/index.php?page=post&s=random", {}, {}
 
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
+        image = data.find(id="highres").get("href")
+        if image is None:
+            image = data.find(id="image").get("src")
+        return image
 
-class GelbooruSearch(GenericSearch):
+
+class GelbooruSearch:
     """
     Gets a random image with a specific tag from gelbooru.
     """
@@ -34,3 +43,12 @@ class GelbooruSearch(GenericSearch):
         """
         return (f"http://gelbooru.com/index.php"
                 f"?page=dapi&s=post&q=index&tags={args}", {}, {})
+
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
+        if data:
+            return random.choice(data)['file_url']
+        raise NoResultsFound

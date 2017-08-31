@@ -2,10 +2,9 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-from ..generic import GenericRandom
 
 
-class NhentaiRandom(GenericRandom):
+class NhentaiRandom:
     """
     Gets a random image from nhentai.
     """
@@ -18,3 +17,13 @@ class NhentaiRandom(GenericRandom):
         prepares the request url.
         """
         return "http://nhentai.net/random/", {}, {}
+
+    @staticmethod
+    def get_image(data):
+        """
+        gets an image.
+        """
+        image = data.find(id="highres").get("href")
+        if image is None:
+            image = data.find(id="image").get("src")
+        return image
