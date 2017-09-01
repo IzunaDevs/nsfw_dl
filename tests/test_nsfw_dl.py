@@ -24,142 +24,140 @@ async def test_danbooru_async():
         img = await dl.download("DanbooruRandom")
     assert img is not ""
 
-# TODO: Redo all of these below
-"""
-async def test_danbooru_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("DanbooruSearch", args="rating:e")
-    assert ret is not ""
+
+def test_danbooru_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("DanbooruSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_drunkenpumken_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("DrunkenpumkenRandom")
-    assert ret is not ""
+def test_drunkenpumken_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("DrunkenpumkenRandom")
+        assert img is not ""
 
 
-async def test_e621_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("E621Random")
-    assert ret is not ""
+def test_e621_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("E621Random")
+        assert img is not ""
 
 
-async def test_e621_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("E621Search", args="rating:e")
-    assert ret is not ""
+def test_e621_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("E621Search", args="rating:e")
+        assert img is not ""
 
 
-async def test_furrybooru_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("FurrybooruRandom")
-    assert ret is not ""
+def test_furrybooru_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("FurrybooruRandom")
+        assert img is not ""
 
 
-async def test_furrybooru_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("FurrybooruSearch", args="rating:e")
-    assert ret is not ""
+def test_furrybooru_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("FurrybooruSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_gelbooru_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("GelbooruRandom")
-    assert ret is not ""
+def test_gelbooru_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("GelbooruRandom")
+        assert img is not ""
 
 
-async def test_gelbooru_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("GelbooruSearch", args="rating:e")
-    assert ret is not ""
+def test_gelbooru_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("GelbooruSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_hbrowse_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("HbrowseRandom")
-    assert ret is not ""
+def test_hbrowse_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("HbrowseRandom")
+        assert img is not ""
 
 
-async def test_konachan_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("KonachanRandom")
-    assert ret is not ""
+def test_konachan_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("KonachanRandom")
+        assert img is not ""
 
 
-async def test_konachan_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("KonachanSearch", args="rating:e")
-    assert ret is not ""
+def test_konachan_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("KonachanSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_lolibooru_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("LolibooruRandom")
-    assert ret is not ""
+def test_lolibooru_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("LolibooruRandom")
+        assert img is not ""
 
 
-async def test_lolibooru_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("LolibooruSearch", args="rating:e")
-    assert ret is not ""
+def test_lolibooru_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("LolibooruSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_nhentai_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("NhentaiRandom")
-    assert ret is not ""
+def test_nhentai_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("NhentaiRandom")
+        assert img is not ""
 
 
-async def test_rule34_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("Rule34Random")
-    assert ret is not ""
+def test_rule34_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("Rule34Random")
+        assert img is not ""
 
 
-async def test_rule34_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("Rule34Search", args="rating:e")
-    assert ret is not ""
+def test_rule34_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("Rule34Search", args="rating:e")
+        assert img is not ""
 
 
-async def test_tbib_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("TbibRandom")
-    assert ret is not ""
+def test_tbib_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("TbibRandom")
+        assert img is not ""
 
 
-async def test_tbib_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("TbibSearch", args="rating:e")
-    assert ret is not ""
+def test_tbib_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("TbibSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_tsumino_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("TsuminoRandom")
-    assert ret is not ""
+def test_tsumino_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("TsuminoRandom")
+        assert img is not ""
 
 
-async def test_xbooru_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("XbooruRandom")
-    assert ret is not ""
+def test_xbooru_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("XbooruRandom")
+        assert img is not ""
 
 
-async def test_xbooru_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("XbooruSearch", args="rating:e")
-    assert ret is not ""
+def test_xbooru_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("XbooruSearch", args="rating:e")
+        assert img is not ""
 
 
-async def test_yandere_random(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("YandereRandom")
-    assert ret is not ""
+def test_yandere_random():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("YandereRandom")
+        assert img is not ""
 
 
-async def test_yandere_search(event_loop):
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    ret = await _nsfwdl.download("YandereSearch", args="rating:e")
-    assert ret is not ""
-"""
+def test_yandere_search():
+    with nsfw_dl.NSFWDL() as dl:
+        img = dl.download("YandereSearch", args="rating:e")
+        assert img is not ""
