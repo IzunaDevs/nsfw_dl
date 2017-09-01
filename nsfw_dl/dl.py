@@ -10,7 +10,7 @@ from urllib.parse import quote
 import aiohttp
 from bs4 import BeautifulSoup
 
-from .errors import UnsupportedDataFormat, NoLoader
+from .errors import NoLoader, UnsupportedDataFormat
 
 
 __all__ = ['NSFWDL']
