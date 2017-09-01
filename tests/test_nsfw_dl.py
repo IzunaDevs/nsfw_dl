@@ -1,5 +1,6 @@
-import nsfw_dl
 import pytest
+
+import nsfw_dl
 
 # All test coroutines will be treated as marked.
 pytestmark = pytest.mark.asyncio
