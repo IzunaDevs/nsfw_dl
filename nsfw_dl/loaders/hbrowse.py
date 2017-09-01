@@ -2,9 +2,6 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-import random
-
-from ..errors import *  # noqa
 
 
 class HbrowseRandom:

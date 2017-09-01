@@ -51,4 +51,4 @@ class Rule34Search:
         """
         if data:
             return random.choice(data)['file_url']
-        raise NoResultsFound
+        raise NoResultsFound  # noqa
