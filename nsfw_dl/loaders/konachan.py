@@ -26,7 +26,7 @@ class KonachanRandom:
         """
         gets an image.
         """
-        return data.find(id="highres").get("href")
+        return f'https:{data.find(id="highres").get("href")}'
 
 
 class KonachanSearch:

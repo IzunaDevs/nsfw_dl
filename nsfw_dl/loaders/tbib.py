@@ -19,14 +19,14 @@ class TbibRandom:
         """
         prepares the request url.
         """
-        return "http://www.tbib.org/index.php?page=post&s=random", {}, {}
+        return "https://www.tbib.org/index.php?page=post&s=random", {}, {}
 
     @staticmethod
     def get_image(data):
         """
         gets an image.
         """
-        return data.find(id="image").get("src")
+        return f'https:{data.find(id="image").get("src")}'
 
 
 class TbibSearch:
@@ -41,7 +41,7 @@ class TbibSearch:
         """
         prepares the request url.
         """
-        return (f"http://www.tbib.org/index.php"
+        return (f"https://www.tbib.org/index.php"
                 f"?page=dapi&s=post&q=index&tags={args}", {}, {})
 
     @staticmethod

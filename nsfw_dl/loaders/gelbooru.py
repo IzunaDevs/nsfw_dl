@@ -19,14 +19,14 @@ class GelbooruRandom:
         """
         prepares the request url.
         """
-        return "http://www.gelbooru.com/index.php?page=post&s=random", {}, {}
+        return "https://www.gelbooru.com/index.php?page=post&s=random", {}, {}
 
     @staticmethod
     def get_image(data):
         """
         gets an image.
         """
-        return data.find(id="image").get("src")
+        return f'https:{data.find(id="image").get("src")}'
 
 
 class GelbooruSearch:
@@ -41,7 +41,7 @@ class GelbooruSearch:
         """
         prepares the request url.
         """
-        return (f"http://gelbooru.com/index.php"
+        return (f"https://gelbooru.com/index.php"
                 f"?page=dapi&s=post&q=index&tags={args}", {}, {})
 
     @staticmethod
