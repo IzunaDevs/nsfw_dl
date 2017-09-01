@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *  # noqa
+from nsfw_dl.errors import NoResultsFound
 
 
 class YandereRandom:
@@ -50,4 +50,4 @@ class YandereSearch:
         """
         if data:
             return random.choice(data)['file_url']
-        raise NoResultsFound  # noqa
+        raise NoResultsFound

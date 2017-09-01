@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *  # noqa
+from nsfw_dl.errors import NoResultsFound
 
 
 class DrunkenpumkenRandom:
@@ -53,4 +53,4 @@ class DrunkenpumkenSearch:
         """
         if data:
             return random.choice(data)['file_url']
-        raise NoResultsFound  # noqa
+        raise NoResultsFound
