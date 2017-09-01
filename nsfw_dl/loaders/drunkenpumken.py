@@ -2,6 +2,7 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+from nsfw_dl import *
 
 
 class DrunkenpumkenRandom:
@@ -33,7 +34,7 @@ class DrunkenpumkenRandom:
 # WHERE IS THE FUCKIN API DOCS TO DRUNKENPUMKEN TO SEARCH TAGS???
 class DrunkenpumkenSearch:
     """
-    Gets a random image with a specific tag from danbooru.
+    Gets a random image with a specific tag from drunkenpumken.
     """
     reqtype = "get"
     data_format = "bs4/xml"

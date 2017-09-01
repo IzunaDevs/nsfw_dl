@@ -10,8 +10,7 @@ from urllib.parse import quote
 import aiohttp
 from bs4 import BeautifulSoup
 
-
-from .errors import UnsupportedDataFormat, NoLoader
+from nsfw_dl import UnsupportedDataFormat, NoLoader
 
 
 __all__ = ['NSFWDL']
@@ -41,6 +40,7 @@ class NSFWDL:
         self.session = session or aiohttp.ClientSession(loop=loop)
         self.json_loader = json_loader
         self.loaders = {}
+        self.load_default()
 
     def add_loader(self, name, downloader):
         """
@@ -89,13 +89,14 @@ class NSFWDL:
             else:
                 raise UnsupportedDataFormat(loader.data_format)
 
+        img_url = ""  # bypass any strange python errors.
         if reqdata == "url":
             img_url = resp.url
         else:
             img_url = loader.get_image(reqdata)
 
         if download:
-            async with self.session.get(url) as resp:
+            async with self.session.get(img_url) as resp:
                 assert 200 <= resp.status_code < 300
                 return io.BytesIO(await resp.read())
 

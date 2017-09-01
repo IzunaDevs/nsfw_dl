@@ -2,11 +2,12 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+from nsfw_dl import *
 
 
 class XbooruRandom:
     """
-    Gets a random image from yandere.
+    Gets a random image from xbooru.
     """
     reqtype = "get"
     data_format = "bs4/html"
@@ -31,7 +32,7 @@ class XbooruRandom:
 
 class XbooruSearch:
     """
-    Gets a random image with a specific tag from yandere.
+    Gets a random image with a specific tag from xbooru.
     """
     reqtype = "get"
     data_format = "bs4/xml"

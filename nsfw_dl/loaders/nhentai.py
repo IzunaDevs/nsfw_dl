@@ -2,6 +2,7 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+from nsfw_dl import *
 
 
 class NhentaiRandom:

@@ -1,13 +1,51 @@
 language: python
 
 python:
-  - "3.6"
+  - 3.6
+
+# matrix:
+#   allow_failures:
+#     - python: '3.6-dev'
+#     - python: 'nightly'
+#     - os: osx
+
+cache:
+  directories:
+  - $HOME/.cache/pip
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
 
 install:
-  - "pip install --upgrade flake8 pylint"
-script: pytest
-cache: pip
+  - sudo apt-get install enchant
+  - pip install --upgrade pip setuptools wheel
+  - pip install -r requirements-ci.txt
+  - pip install --upgrade setuptools
+  - pip install codecov
+
+script:
+  - make cov-dev-full
+
+after_success:
+  - codecov
+
+# deploy:
+#   provider: pypi
+#   user: Decorater
+#   password:
+#     secure: kaXSuDTjDAXmQk2P0w2u6sXfvSIKcT4NA2yCDonN3ybngN6BaUV+UX9u1KR1wmwWzFhgsV4D79d31KbUUO26ipbkiLACaNMfrYRsWazIVU8ct0gZoUPeJFwIm8T8wdTUmXCNDDxyVX7yTVvPRVN/m10tBYHBsXYSibBz+dboQwLT/mz1VSHxBcMsJEXud/Hbb9kYlsYJ3zTc/PXVZAlZXxcxyDXsn3mHajurlnT1ICwXpnI1e1ptaPznQywKvjmajHfWoEDlHuMJ426jK0NdnFhpRFORB45rE3YicvaOvnxYdaxoVUSb2V2Rq/qi70F42YKvp/G3hOqp9jaDB+MiZcOnLxjyHENbnB+p6TLrs0AieZ2OgpDiykeu2q0aFZRMbSycV9/lW1BGxMwI3krtlLUMJ8I6p6EP+09JdRK2V8mzyjD/Jc07MIQEMKeY90t+ko5EjRNRDpmsbjKDeWMcb6jhkYqfrnofbWb2yHL+d7bKVtf6JUt+WfZvLVT6gJSv7feXquYhKYmp626u4aAZVomvPpM7Qke2wQvGtA/+uJCzRCQAUGxxNwN3PP6GlHt/uBvgLDmbVan6576mpEV8XKAwjVzs6VAgivpreucy7ZD3c8UF1lT0n5kYtIXkp7P26TLKYFk0VkiqYOCJ3umo4f+gi6YvBeAGCq2jh/+Pr+U=
+#   distributions: "sdist"
+#   on:
+#     tags: true
+#     all_branches: true
+#     python: 3.6
+
+# install:
+#   - "pip install --upgrade flake8 pylint"
+# script: pytest
+# cache: pip
 
 
 notifications:
   email: false
+

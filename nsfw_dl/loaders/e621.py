@@ -2,11 +2,12 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+from nsfw_dl import *
 
 
 class E621Random:
     """
-    Gets a random image from gelbooru.
+    Gets a random image from e621.
     """
     reqtype = "get"
     data_format = "bs4/html"
@@ -31,7 +32,7 @@ class E621Random:
 
 class E621Search:
     """
-    Gets a random image with a specific tag from gelbooru.
+    Gets a random image with a specific tag from e621.
     """
     reqtype = "get"
     data_format = "json"
