@@ -19,14 +19,14 @@ class DanbooruRandom:
         """
         prepares the request url.
         """
-        return "http://danbooru.donmai.us/posts/random", {}, {}
+        return "https://danbooru.donmai.us/posts/random", {}, {}
 
     @staticmethod
     def get_image(data):
         """
         gets an image.
         """
-        return data.find(id="image").get("src")
+        return f'https://danbooru.donmai.us{data.find(id="image").get("src")}'
 
 
 class DanbooruSearch:
@@ -41,7 +41,7 @@ class DanbooruSearch:
         """
         prepares the request url.
         """
-        return f"http://danbooru.donmai.us/posts.json?tags={args}", {}, {}
+        return f"https://danbooru.donmai.us/posts.json?tags={args}", {}, {}
 
     @staticmethod
     def get_image(data):
