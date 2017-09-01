@@ -1,7 +1,5 @@
-import codecs
-import os
-import re
-from setuptools import setup
+from nsfw_dl import __version__
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
@@ -9,13 +7,6 @@ install_requires = [
     'aiohttp>=2.2.0', 'beautifulsoup4>=4.6.0',
     'lxml>=3.8.0']
 
-with codecs.open(os.path.join(os.path.abspath(os.path.dirname(
-        __file__)), 'nsfw_dl', '__init__.py'), 'r', 'latin1') as fp:
-    try:
-        version = re.findall(r"^__version__ = '([^']+)'\r?$",
-                             fp.read(), re.M)[0]
-    except IndexError:
-        raise RuntimeError('Unable to determine version.')
 
 try:
     with open('README.rst') as f:
@@ -33,13 +24,14 @@ class PyTest(TestCommand):
         errno = subprocess.call([sys.executable, '-m', 'pytest', 'tests'])
         raise SystemExit(errno)
 
+
 # TODO: Change classifiers on this.
 setup(name='nsfw_dl',
       author='IzunaDevs',
       author_email='izunadevs@martmists.com',
       url='https://github.com/IzunaDevs/nsfw_dl',
-      version=version,
-      packages=['nsfw_dl'],
+      version=__version__,
+      packages=find_packages(),
       license='MIT',
       description='Python 3 package for downloading nsfw images.',
       long_description=readme,
@@ -65,4 +57,4 @@ setup(name='nsfw_dl',
         'Topic :: Utilities'
       ],
       cmdclass=dict(test=PyTest)
-)
+      )

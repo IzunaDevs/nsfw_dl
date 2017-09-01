@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *  # noqa
+from nsfw_dl.errors import NoResultsFound
 
 
 class GelbooruRandom:
@@ -34,15 +34,15 @@ class GelbooruSearch:
     Gets a random image with a specific tag from gelbooru.
     """
     reqtype = "get"
-    data_format = "bs4/xml"
+    data_format = "bs4/html"
 
     @staticmethod
     def prepare_url(args):
         """
         prepares the request url.
         """
-        return (f"https://gelbooru.com/index.php"
-                f"?page=dapi&s=post&q=index&tags={args}", {}, {})
+        return ("http://furry.booru.org/index.php"
+                f"?page=post&s=list&tags={args}", {}, {})
 
     @staticmethod
     def get_image(data):
@@ -50,5 +50,7 @@ class GelbooruSearch:
         gets an image.
         """
         if data:
-            return random.choice(data)['file_url']
-        raise NoResultsFound  # noqa
+            images = data.find_all(attrs="thumb")
+            if images:
+                return random.choice(images).find("img").get("src")
+        raise NoResultsFound

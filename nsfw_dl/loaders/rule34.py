@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *  # noqa
+from nsfw_dl.errors import NoResultsFound
 
 
 class Rule34Random:
@@ -34,14 +34,14 @@ class Rule34Search:
     Gets a random image with a specific tag from rule34.
     """
     reqtype = "get"
-    data_format = "bs4/xml"
+    data_format = "bs4/html"
 
     @staticmethod
     def prepare_url(args):
         """
         prepares the request url.
         """
-        return (f"https://rule34.xxx/index.php"
+        return ("https://rule34.xxx/index.php"
                 f"?page=dapi&s=post&q=index&tags={args}", {}, {})
 
     @staticmethod
@@ -50,5 +50,7 @@ class Rule34Search:
         gets an image.
         """
         if data:
-            return random.choice(data)['file_url']
-        raise NoResultsFound  # noqa
+            images = data.find_all(attrs="thumb")
+            if images:
+                return random.choice(images).find("img").get("src")
+        raise NoResultsFound

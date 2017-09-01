@@ -9,10 +9,10 @@ from urllib.parse import quote
 
 import aiohttp
 from bs4 import BeautifulSoup
+import requests
 
 from .errors import NoLoader, UnsupportedDataFormat
 
-__all__ = ['NSFWDL']
 LOADERS = {
     "danbooru": ["DanbooruRandom", "DanbooruSearch"],
     "drunkenpumken": ["DrunkenpumkenRandom"],
@@ -36,7 +36,9 @@ class NSFWDL:
     Main class.
     """
     def __init__(self, session=None, loop=None, json_loader=json.loads):
-        self.session = session or aiohttp.ClientSession(loop=loop)
+        self.async_ = None
+        self.loop = loop
+        self.session = session
         self.json_loader = json_loader
         self.loaders = {}
         self.load_default()
@@ -54,22 +56,38 @@ class NSFWDL:
         """
         return quote(args)
 
+    async def __aenter__(self):
+        if self.async_ is not True:
+            self.session = aiohttp.ClientSession(loop=self.loop)
+        self.async_ = True
+        return self
+
+    async def __aexit__(self, *exc):
+        return
+
+    def __enter__(self):
+        if self.async_ is not False:
+            if self.async_ is True:
+                self.session.close()
+
+            self.session = requests
+        self.async_ = False
+        return self
+
+    def __exit__(self, *exc):
+        return
+
+    def __del__(self):
+        if self.async_:
+            self.session.close()
+
     def __getattr__(self, item):
         if item in self.loaders:
             return self.loaders[item]
 
-    async def download(self, name, args="", download=False):
-        """
-        downloads or returns the image urls based on the loaders.
-        """
-        if name not in self.loaders:
-            raise NoLoader(f"No loader named {name!r}")
-
-        loader = self.loaders[name]
-
-        args = self.parse_args(args)
-        url, data, headers = loader.prepare_url(args=args)
+    async def download_async(self, url, data, headers, loader, download=False):
         reqmeth = getattr(self.session, loader.reqtype)
+
         async with reqmeth(url, data=data, headers=headers) as resp:
             assert 200 <= resp.status < 300
 
@@ -82,15 +100,15 @@ class NSFWDL:
             elif loader.data_format == "json":
                 reqdata = await resp.json(loads=self.json_loader)
 
-            # return type is an url.
             elif loader.data_format == "url":
                 reqdata = loader.data_format
+
             else:
                 raise UnsupportedDataFormat(loader.data_format)
 
-        img_url = ""  # bypass any strange python errors.
         if reqdata == "url":
             img_url = resp.url
+
         else:
             img_url = loader.get_image(reqdata)
 
@@ -100,6 +118,54 @@ class NSFWDL:
                 return io.BytesIO(await resp.read())
 
         return img_url
+
+    def download_sync(self, url, data, headers, loader, download=False):
+        reqmeth = getattr(self.session, loader.reqtype)
+        resp = reqmeth(url, data=data, headers=headers)
+        assert 200 <= resp.status_code < 300
+
+        if loader.data_format == "bs4/html":
+            reqdata = BeautifulSoup(resp.text, "html.parser")
+
+        elif loader.data_format == "bs4/xml":
+            reqdata = BeautifulSoup(resp.text, "lxml")
+
+        elif loader.data_format == "json":
+            reqdata = resp.json(loads=self.json_loader)
+
+        elif loader.data_format == "url":
+            reqdata = loader.data_format
+
+        else:
+            raise UnsupportedDataFormat(loader.data_format)
+
+        if reqdata == "url":
+            img_url = resp.url
+        else:
+            img_url = loader.get_image(reqdata)
+
+        if download:
+            resp = self.session.get(img_url)
+            assert 200 <= resp.status < 300
+            return io.BytesIO(resp.content)
+
+        return img_url
+
+    def download(self, name, args="", download=False):
+        """
+        downloads or returns the image urls based on the loaders.
+        """
+        if name not in self.loaders:
+            raise NoLoader(f"No loader named {name!r}")
+
+        loader = self.loaders[name]
+
+        args = self.parse_args(args)
+        url, data, headers = loader.prepare_url(args=args)
+
+        return (self.download_async(url, data, headers, loader, download)
+                if self.async_ else
+                self.download_sync(url, data, headers, loader, download))
 
     def load_default(self):
         """

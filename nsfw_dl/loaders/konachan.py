@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *  # noqa
+from nsfw_dl.errors import NoResultsFound
 
 
 class KonachanRandom:
@@ -41,7 +41,7 @@ class KonachanSearch:
         """
         prepares the request url.
         """
-        return (f"https://konachan.com/post.json"
+        return ("https://konachan.com/post.json"
                 f"?page=dapi&s=post&q=index&tags={args}", {}, {})
 
     @staticmethod
@@ -51,4 +51,4 @@ class KonachanSearch:
         """
         if data:
             return random.choice(data)['file_url']
-        raise NoResultsFound  # noqa
+        raise NoResultsFound
