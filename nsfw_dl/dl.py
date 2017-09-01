@@ -70,7 +70,7 @@ class NSFWDL:
             if self.async_ is True:
                 self.session.close()
 
-            self.session = requests
+            self.session = requests.Session()
         self.async_ = False
         return self
 
@@ -131,7 +131,7 @@ class NSFWDL:
             reqdata = BeautifulSoup(resp.text, "lxml")
 
         elif loader.data_format == "json":
-            reqdata = resp.json(loads=self.json_loader)
+            reqdata = self.json_loader(resp.text)
 
         elif loader.data_format == "url":
             reqdata = loader.data_format
