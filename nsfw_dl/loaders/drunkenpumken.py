@@ -27,10 +27,7 @@ class DrunkenpumkenRandom:
         """
         gets an image.
         """
-        image = data.find(id="highres").get("href")
-        if image is None:
-            image = data.find(id="image").get("src")
-        return image
+        return data.find(id="image").get("src")
 
 
 # WHERE IS THE FUCKIN API DOCS TO DRUNKENPUMKEN TO SEARCH TAGS???

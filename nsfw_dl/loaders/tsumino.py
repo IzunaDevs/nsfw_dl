@@ -26,7 +26,4 @@ class TsuminoRandom:
         """
         gets an image.
         """
-        image = data.find(id="highres").get("href")
-        if image is None:
-            image = data.find(id="image").get("src")
-        return image
+        return data.find(id="highres").get("href")
