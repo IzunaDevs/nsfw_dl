@@ -1,3 +1,6 @@
+import codecs
+import os
+import re
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
@@ -33,7 +36,6 @@ setup(name='nsfw_dl',
       author='IzunaDevs',
       author_email='izunadevs@martmists.com',
       url='https://github.com/IzunaDevs/nsfw_dl',
-      bugtrack_url='https://github.com/IzunaDevs/nsfw_dl/issues',
       version=version,
       packages=['nsfw_dl'],
       license='MIT',
@@ -45,7 +47,7 @@ setup(name='nsfw_dl',
       install_requires=install_requires,
       tests_require=['pytest', 'flake8', 'pyflakes', 'coverage',
                      'isort', 'pytest-cov', 'pytest-mock',
-                     'pytest-timeout', , 'pytest-asyncio',
+                     'pytest-timeout', 'pytest-asyncio',
                      'pylint'],
       platforms='Any',
       classifiers=[

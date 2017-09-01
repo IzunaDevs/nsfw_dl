@@ -2,7 +2,9 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-from nsfw_dl import *
+import random
+
+from ..errors import *
 
 
 class GelbooruRandom:

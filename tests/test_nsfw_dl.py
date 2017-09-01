@@ -9,11 +9,12 @@ pytestmark = pytest.mark.asyncio
 
 async def test_fake_loader(event_loop):
     """tests the NSFWDL class."""
-    _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
-    await _nsfwdl.download("fake_loader", args="test")
+    with pytest.raises(nsfw_dl.errors.NoLoader):
+        _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
+        await _nsfwdl.download("fake_loader", args="test")
 
 
-async def test_danbooru_random():
+async def test_danbooru_random(event_loop):
     """tests danbooru's random."""
     _nsfwdl = nsfw_dl.NSFWDL(loop=event_loop)
     ret = await _nsfwdl.download("DanbooruRandom")
