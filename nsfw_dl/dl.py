@@ -70,8 +70,8 @@ class NSFWDL:
 
         args = self.parse_args(args)
         url, data, headers = loader.prepare_url(args=args)
-        async with getattr(self.session, loader.reqtype)(
-            url, data=data, headers=headers) as resp:
+        reqmeth = getattr(self.session, loader.reqtype)
+        async with reqmeth(url, data=data, headers=headers) as resp:
             assert 200 <= resp.status < 300
 
             if loader.data_format == "bs4/html":
