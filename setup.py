@@ -5,7 +5,9 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
-install_requires = ['aiohttp>=2.2.0', 'beautifulsoup4>=4.6.0']
+install_requires = [
+    'aiohttp>=2.2.0', 'beautifulsoup4>=4.6.0',
+    'lxml>=3.8.0']
 
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(
         __file__)), 'nsfw_dl', '__init__.py'), 'r', 'latin1') as fp:
