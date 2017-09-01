@@ -12,7 +12,6 @@ from bs4 import BeautifulSoup
 
 from .errors import NoLoader, UnsupportedDataFormat
 
-
 __all__ = ['NSFWDL']
 LOADERS = {
     "danbooru": ["DanbooruRandom", "DanbooruSearch"],
