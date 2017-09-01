@@ -2,8 +2,8 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
-from .errors import *
-from .dl import *
+from .errors import *  # noqa
+from .dl import *  # noqa
 
 
 __title__ = 'nsfw_dl'

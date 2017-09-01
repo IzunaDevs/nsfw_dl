@@ -4,7 +4,7 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from ..errors import *
+from ..errors import *  # noqa
 
 
 class DrunkenpumkenRandom:
