@@ -48,9 +48,6 @@ class NSFWDL:
         """
         self.loaders[name] = downloader
 
-    def __del__(self):
-        self.session.loop.run_until_complete(self.session.close())
-
     @staticmethod
     def parse_args(args):
         """
