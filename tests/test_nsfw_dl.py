@@ -7,7 +7,7 @@ def test_fake_loader():
     """tests the NSFWDL class."""
     with pytest.raises(nsfw_dl.errors.NoLoader):
         with nsfw_dl.NSFWDL() as dl:
-            dl.download("fake_loader", args="rating:e")
+            dl.download("fake_loader", args="1girl")
 
 
 def test_danbooru_random():
@@ -27,7 +27,7 @@ async def test_danbooru_async():
 
 def test_danbooru_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("DanbooruSearch", args="rating:e")
+        img = dl.download("DanbooruSearch", args="1girl")
         assert img is not ""
 
 
@@ -45,7 +45,7 @@ def test_e621_random():
 
 def test_e621_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("E621Search", args="rating:e")
+        img = dl.download("E621Search", args="1girl")
         assert img is not ""
 
 
@@ -57,7 +57,7 @@ def test_furrybooru_random():
 
 def test_furrybooru_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("FurrybooruSearch", args="rating:e")
+        img = dl.download("FurrybooruSearch", args="1girl")
         assert img is not ""
 
 
@@ -69,7 +69,7 @@ def test_gelbooru_random():
 
 def test_gelbooru_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("GelbooruSearch", args="rating:e")
+        img = dl.download("GelbooruSearch", args="1girl")
         assert img is not ""
 
 
@@ -87,7 +87,7 @@ def test_konachan_random():
 
 def test_konachan_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("KonachanSearch", args="rating:e")
+        img = dl.download("KonachanSearch", args="1girl")
         assert img is not ""
 
 
@@ -99,7 +99,7 @@ def test_lolibooru_random():
 
 def test_lolibooru_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("LolibooruSearch", args="rating:e")
+        img = dl.download("LolibooruSearch", args="1girl")
         assert img is not ""
 
 
@@ -117,7 +117,7 @@ def test_rule34_random():
 
 def test_rule34_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("Rule34Search", args="rating:e")
+        img = dl.download("Rule34Search", args="1girl")
         assert img is not ""
 
 
@@ -129,7 +129,7 @@ def test_tbib_random():
 
 def test_tbib_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("TbibSearch", args="rating:e")
+        img = dl.download("TbibSearch", args="1girl")
         assert img is not ""
 
 
@@ -147,7 +147,7 @@ def test_xbooru_random():
 
 def test_xbooru_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("XbooruSearch", args="rating:e")
+        img = dl.download("XbooruSearch", args="1girl")
         assert img is not ""
 
 
@@ -159,5 +159,5 @@ def test_yandere_random():
 
 def test_yandere_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("YandereSearch", args="rating:e")
+        img = dl.download("YandereSearch", args="1girl")
         assert img is not ""

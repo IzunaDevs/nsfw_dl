@@ -34,7 +34,7 @@ class Rule34Search:
     Gets a random image with a specific tag from rule34.
     """
     reqtype = "get"
-    data_format = "bs4/html"
+    data_format = "bs4/xml"
 
     @staticmethod
     def prepare_url(args):
@@ -50,7 +50,8 @@ class Rule34Search:
         gets an image.
         """
         if data:
-            images = data.find_all(attrs="thumb")
-            if images:
-                return random.choice(images).find("img").get("src")
+            if int(data.find('posts')['count']) > 0:
+                imagelist = [tag.get('file_url') for tag in data.find_all(
+                    'post')]
+                return random.choice(imagelist)
         raise NoResultsFound

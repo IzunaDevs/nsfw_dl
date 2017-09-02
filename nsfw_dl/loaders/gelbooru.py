@@ -26,7 +26,10 @@ class GelbooruRandom:
         """
         gets an image.
         """
-        return f'https:{data.find(id="image").get("src")}'
+        try:
+            return f'https:{data.find(id="image").get("src")}'
+        except AttributeError:
+            raise AttributeError(str(data))
 
 
 class GelbooruSearch:

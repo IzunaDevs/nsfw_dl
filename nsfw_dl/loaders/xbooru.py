@@ -50,5 +50,8 @@ class XbooruSearch:
         gets an image.
         """
         if data:
-            return random.choice(data)['file_url']
+            if int(data.find('posts')['count']) > 0:
+                imagelist = [tag.get('file_url') for tag in data.find_all(
+                    'post')]
+                return random.choice(imagelist)
         raise NoResultsFound
