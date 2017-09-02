@@ -1,4 +1,5 @@
 ## nsfw_dl
+[![Travis Build](https://travis-ci.org/IzunaDevs/nsfw_dl.svg?branch=master)](https://travis-ci.org/IzunaDevs/nsfw_dl)
 
 This is an discord library that works with aiohttp and async.
 
