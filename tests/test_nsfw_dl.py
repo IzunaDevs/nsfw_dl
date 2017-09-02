@@ -87,7 +87,7 @@ def test_konachan_random():
 
 def test_konachan_search():
     with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("KonachanSearch", args="1girl")
+        img = dl.download("KonachanSearch", args="2girls")
         assert img is not ""
 
 
