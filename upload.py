@@ -11,8 +11,7 @@ pw = os.environ["PYPI_PASSWORD"]
 
 try:
     remote_ver = requests.get(
-            "https://pypi.python.org/pypi/nsfw_dl/json").json()[
-            "info"]["version"]
+        "https://pypi.python.org/pypi/nsfw_dl/json").json()["info"]["version"]
 
 except:  # noqa pylint: disable=bare-except
     remote_ver = "0.0.0"
@@ -23,10 +22,8 @@ if ver != remote_ver:
     print("UPLOADING TO PYPI")
 
     p1 = subprocess.Popen(
-            "python3.6 setup.py build build_ext build_whl".split(),
-            stdout=subprocess.PIPE)
+        "python3.6 setup.py build build_ext build_whl".split())
     p1.wait()
     p2 = subprocess.Popen(
-            f"twine upload build/*{ver}* -u {un} -p {pw}".split(),
-            stdout=subprocess.PIPE)
+        f"twine upload build/*{ver}* -u {un} -p {pw}".split())
     p2.wait()
