@@ -19,8 +19,6 @@ except:  # noqa pylint: disable=bare-except
 ver = nsfw_dl.__version__
 
 if ver != remote_ver:
-    print("UPLOADING TO PYPI")
-
     p1 = subprocess.Popen(
         "python3.6 setup.py sdist bdist_egg bdist_wheel".split())
     p1.wait()
