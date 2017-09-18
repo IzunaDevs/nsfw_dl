@@ -86,6 +86,7 @@ class NSFWDL:
             return self.loaders[item]
 
     async def download_async(self, url, data, headers, loader, download=False):
+        """ async downloader. """
         reqmeth = getattr(self.session, loader.reqtype)
 
         async with reqmeth(url, data=data, headers=headers) as resp:
@@ -120,6 +121,7 @@ class NSFWDL:
         return img_url
 
     def download_sync(self, url, data, headers, loader, download=False):
+        """ sync downloader. """
         reqmeth = getattr(self.session, loader.reqtype)
         resp = reqmeth(url, data=data, headers=headers)
         assert 200 <= resp.status_code < 300
