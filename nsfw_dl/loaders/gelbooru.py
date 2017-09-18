@@ -19,6 +19,7 @@ class GelbooruRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "https://www.gelbooru.com/index.php?page=post&s=random", {}, {}
 
     @staticmethod

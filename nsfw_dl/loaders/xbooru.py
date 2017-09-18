@@ -19,6 +19,7 @@ class XbooruRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "http://xbooru.com/index.php?page=post&s=random", {}, {}
 
     @staticmethod

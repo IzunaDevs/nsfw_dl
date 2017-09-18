@@ -16,6 +16,7 @@ class HbrowseRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "http://www.hbrowse.com/random", {}, {}
 
     @staticmethod

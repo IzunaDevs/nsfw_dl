@@ -19,6 +19,7 @@ class DanbooruRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "https://danbooru.donmai.us/posts/random", {}, {}
 
     @staticmethod

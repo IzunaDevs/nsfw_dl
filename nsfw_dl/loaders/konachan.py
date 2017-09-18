@@ -19,6 +19,7 @@ class KonachanRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "https://konachan.com/post/random", {}, {}
 
     @staticmethod

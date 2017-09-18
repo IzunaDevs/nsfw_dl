@@ -19,6 +19,7 @@ class Rule34Random:
         """
         prepares the request url.
         """
+        type(args)
         return "http://rule34.xxx/index.php?page=post&s=random", {}, {}
 
     @staticmethod

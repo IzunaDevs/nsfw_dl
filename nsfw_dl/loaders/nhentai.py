@@ -16,6 +16,7 @@ class NhentaiRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "http://nhentai.net/random/", {}, {}
 
     @staticmethod

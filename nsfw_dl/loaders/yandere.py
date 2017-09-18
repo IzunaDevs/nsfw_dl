@@ -19,6 +19,7 @@ class YandereRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "https://yande.re/post/random", {}, {}
 
     @staticmethod

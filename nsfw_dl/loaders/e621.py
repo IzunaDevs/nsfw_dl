@@ -19,6 +19,7 @@ class E621Random:
         """
         prepares the request url.
         """
+        type(args)
         return "https://e621.net/post/random", {}, {}
 
     @staticmethod

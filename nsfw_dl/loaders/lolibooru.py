@@ -19,6 +19,7 @@ class LolibooruRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "https://lolibooru.moe/post/random/", {}, {}
 
     @staticmethod

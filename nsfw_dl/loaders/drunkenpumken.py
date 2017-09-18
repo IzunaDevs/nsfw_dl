@@ -19,6 +19,7 @@ class DrunkenpumkenRandom:
         """
         prepares the request url.
         """
+        type(args)
         return ("http://drunkenpumken.booru.org/"
                 "index.php?page=post&s=random", {}, {})
 

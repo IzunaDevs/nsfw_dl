@@ -16,6 +16,7 @@ class TsuminoRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "http://www.tsumino.com/Browse/Random", {}, {}
 
     @staticmethod

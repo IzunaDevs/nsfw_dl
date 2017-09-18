@@ -19,6 +19,7 @@ class FurrybooruRandom:
         """
         prepares the request url.
         """
+        type(args)
         return "http://furry.booru.org/index.php?page=post&s=random", {}, {}
 
     @staticmethod
