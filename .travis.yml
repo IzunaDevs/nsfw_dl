@@ -17,7 +17,7 @@ script:
   - flake8
   - python3.6 setup.py install
   - pytest
-  # - python3.6 upload.py
+  - python3.6 upload.py
 notifications:
   email: false
 
