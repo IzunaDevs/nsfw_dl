@@ -14,12 +14,14 @@ try:
             "https://pypi.python.org/pypi/nsfw_dl/json").json()[
             "info"]["version"]
 
-except KeyError:
+except:  # noqa pylint: disable=bare-except
     remote_ver = "0.0.0"
 
 ver = nsfw_dl.__version__
 
 if ver != remote_ver:
+    print("UPLOADING TO PYPI")
+
     p1 = subprocess.Popen(
             "python3.6 setup.py build buld_ext build_whl".split(),
             stdout=subprocess.PIPE)
