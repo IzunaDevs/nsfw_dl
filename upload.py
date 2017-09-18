@@ -9,8 +9,14 @@ import nsfw_dl
 un = os.environ["PYPI_USERNAME"]
 pw = os.environ["PYPI_PASSWORD"]
 
-remote_ver = requests.get(
-    "https://pypi.python.org/pypi/nsfw_dl/json").json()["info"]["version"]
+try:
+    remote_ver = requests.get(
+            "https://pypi.python.org/pypi/nsfw_dl/json").json()[
+            "info"]["version"]
+
+except KeyError:
+    remote_ver = "0.0.0"
+
 ver = nsfw_dl.__version__
 
 if ver != remote_ver:
