@@ -58,6 +58,8 @@ class NSFWDL:
 
     async def __aenter__(self):
         if self.async_ is not True:
+            if self.async_ is False:
+                self.session.close()
             self.session = aiohttp.ClientSession(loop=self.loop)
         self.async_ = True
         return self
@@ -78,12 +80,22 @@ class NSFWDL:
         return
 
     def __del__(self):
-        if self.async_:
-            self.session.close()
+        self.session.close()
 
     def __getattr__(self, item):
         if item in self.loaders:
             return self.loaders[item]
+
+    async def get_async(self, url):
+        async with self.session.get(url) as resp:
+            return await resp.read()
+
+    def get_sync(self, url):
+        with self.session.get(url) as resp:
+            return resp.content
+
+    def get(self, url):
+        return self.get_async(url) if self.async_ else self.get_sync(url)
 
     async def download_async(self, url, data, headers, loader, download=False):
         """ async downloader. """
