@@ -1,3 +1,5 @@
+#!/usr/bin/python3.6
+
 """
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
@@ -24,7 +26,7 @@ def download(downloader, args, file, download_file):
             print(img)
 
 
-def main(argv):
+def main(argv=sys.argv[1:]):
     """
     Main entrypoint to nsfw_dl commandline.
     """
@@ -55,4 +57,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
