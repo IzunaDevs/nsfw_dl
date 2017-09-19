@@ -26,7 +26,7 @@ def download(downloader, args, file, download_file):
             print(img)
 
 
-def main(argv=sys.argv[1:]):
+def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
     """
     Main entrypoint to nsfw_dl commandline.
     """

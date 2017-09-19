@@ -103,10 +103,12 @@ def test_lolibooru_search():
         assert img
 
 
+"""
 def test_nhentai_random():
     with nsfw_dl.NSFWDL() as dl:
         img = dl.download("NhentaiRandom")
         assert img
+"""
 
 
 def test_rule34_random():
