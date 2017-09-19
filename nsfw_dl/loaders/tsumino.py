@@ -5,23 +5,16 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 
 
 class TsuminoRandom:
-    """
-    Gets a random image from tsumino.
-    """
-    reqtype = "get"
+    """ Gets a random image from tsumino. """
     data_format = "url"
 
     @staticmethod
     def prepare_url(args):
-        """
-        prepares the request url.
-        """
+        """ ... """
         type(args)
         return "http://www.tsumino.com/Browse/Random", {}, {}
 
     @staticmethod
     def get_image(data):
-        """
-        gets an image.
-        """
+        """ ... """
         return data.find(id="highres").get("href")

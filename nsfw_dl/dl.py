@@ -87,7 +87,10 @@ class NSFWDL:
 
     async def download_async(self, url, data, headers, loader, download=False):
         """ async downloader. """
-        reqmeth = getattr(self.session, loader.reqtype)
+        reqtype = getattr(loader, 'reqtype', None)
+        if reqtype is None:
+            reqtype = "get"
+        reqmeth = getattr(self.session, reqtype)
 
         async with reqmeth(url, data=data, headers=headers) as resp:
             assert 200 <= resp.status < 300
@@ -122,7 +125,10 @@ class NSFWDL:
 
     def download_sync(self, url, data, headers, loader, download=False):
         """ sync downloader. """
-        reqmeth = getattr(self.session, loader.reqtype)
+        reqtype = getattr(loader, 'reqtype', None)
+        if reqtype is None:
+            reqtype = "get"
+        reqmeth = getattr(self.session, reqtype)
         resp = reqmeth(url, data=data, headers=headers)
         assert 200 <= resp.status_code < 300
 
@@ -165,9 +171,9 @@ class NSFWDL:
         args = self.parse_args(args)
         url, data, headers = loader.prepare_url(args=args)
 
-        return (self.download_async(url, data, headers, loader, download)
+        return (self.download_async(url, data, headers, loader, download=download)
                 if self.async_ else
-                self.download_sync(url, data, headers, loader, download))
+                self.download_sync(url, data, headers, loader, download=download))
 
     def load_default(self):
         """

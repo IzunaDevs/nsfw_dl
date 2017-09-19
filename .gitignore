@@ -17,6 +17,8 @@ sdist/
 develop-eggs/
 .installed.cfg
 .cache
+# exclude log files.
+*.log
 
 # Installer logs
 pip-log.txt
