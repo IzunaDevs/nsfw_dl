@@ -171,9 +171,9 @@ class NSFWDL:
         args = self.parse_args(args)
         url, data, headers = loader.prepare_url(args=args)
 
-        return (self.download_async(url, data, headers, loader, download=download)
+        return (self.download_async(url, data, headers, loader, download)
                 if self.async_ else
-                self.download_sync(url, data, headers, loader, download=download))
+                self.download_sync(url, data, headers, loader, download))
 
     def load_default(self):
         """
