@@ -43,7 +43,10 @@ setup(name='nsfw_dl',
                      'isort', 'pytest-cov', 'pytest-mock',
                      'pytest-timeout', 'pytest-asyncio',
                      'pylint'],
-      scripts=["nsfw_dl/__main__.py"]
+      entry_points={
+              'console_scripts': ['nsfw_dl=nsfw_dl.__main__:main',
+                                  'nsfw-dl=nsfw_dl.__main__:main'],
+      },
       platforms='Any',
       classifiers=[
           'Development Status :: 4 - Beta',
