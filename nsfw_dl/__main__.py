@@ -8,14 +8,14 @@ import sys
 import nsfw_dl
 
 
-def download(downloader, args, file, download):
+def download(downloader, args, file, download_file):
     with nsfw_dl.NSFWDL() as dl:
         img = dl.download(downloader, args=args)
 
         if callable(file):
             file = file(img)
 
-        if download:
+        if download_file:
             with open(file, "wb") as f:
                 f.write(dl.get(img))
                 print(file)
@@ -24,7 +24,6 @@ def download(downloader, args, file, download):
             print(img)
 
 
-# TODO: Add more args.
 def main(argv):
     """
     Main entrypoint to nsfw_dl commandline.

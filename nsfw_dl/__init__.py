@@ -4,7 +4,6 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 
 from .dl import NSFWDL, LOADERS as SOURCES
-from .bases import *
 
 __title__ = 'nsfw_dl'
 __author__ = 'IzunaDevs'
