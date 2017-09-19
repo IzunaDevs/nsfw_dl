@@ -46,7 +46,7 @@ def main(argv):
 
     if args.action == "sources":
         sources = "\n".join("\n".join(v for v in source) for source in
-                            nsfw_dl.SOURCES)
+                            nsfw_dl.SOURCES.values())
         print(sources)
 
     else:
