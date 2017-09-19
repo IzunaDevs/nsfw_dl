@@ -9,5 +9,5 @@ __title__ = 'nsfw_dl'
 __author__ = 'IzunaDevs'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2017 IzunaDevs'
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 __all__ = ["NSFWDL", "SOURCES"]
