@@ -25,7 +25,6 @@ LOADERS = {
     "nhentai": ["NhentaiRandom"],
     "rule34": ["Rule34Random", "Rule34Search"],
     "tbib": ["TbibRandom", "TbibSearch"],
-    "tsumino": ["TsuminoRandom"],
     "xbooru": ["XbooruRandom", "XbooruSearch"],
     "yandere": ["YandereRandom", "YandereSearch"],
 }
