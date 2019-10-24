@@ -135,12 +135,6 @@ def test_tbib_search():
         assert img
 
 
-def test_tsumino_random():
-    with nsfw_dl.NSFWDL() as dl:
-        img = dl.download("TsuminoRandom")
-        assert img
-
-
 def test_xbooru_random():
     with nsfw_dl.NSFWDL() as dl:
         img = dl.download("XbooruRandom")
