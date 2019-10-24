@@ -13,7 +13,8 @@ class E621Random:
     def prepare_url(args):
         """ ... """
         type(args)
-        return "https://e621.net/post/random", {}, {}
+        return ("https://e621.net/post/random", {}, 
+                {"User-Agent": "Mozilla/5.0 Firefox"})
 
     @staticmethod
     def get_image(data):
