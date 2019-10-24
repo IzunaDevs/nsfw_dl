@@ -13,7 +13,8 @@ class E621Random:
     def prepare_url(args):
         """ ... """
         type(args)
-        return "https://e621.net/post/random", {}, {}
+        return ("https://e621.net/post/random", {}, 
+                {"User-Agent": "Mozilla/5.0 Firefox"})
 
     @staticmethod
     def get_image(data):
@@ -29,4 +30,5 @@ class E621Search(BaseSearchJSON):
     def prepare_url(args):
         """ ... """
         return ("https://e621.net/post/index.json?page=dapi&s="
-                f"post&q=index&tags={args}", {}, {})
+                f"post&q=index&tags={args}", {},
+                {"User-Agent": "Mozilla/5.0 Firefox"})
