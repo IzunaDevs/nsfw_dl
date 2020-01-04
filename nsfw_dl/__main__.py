@@ -23,22 +23,30 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
                        default=lambda x: x.split("/")[-1])
     image.add_argument('-s', '--source',
                        help='Image source to use.',
-                       default='Rule34Random')
+                       default='')
     image.add_argument('query', help='Tags to use during search.',
                        default='', nargs="*")
     args = image.parse_args(argv[1:])
-    download_file = args.download
-    file = args.file
-    with nsfw_dl.NSFWDL() as dl:
-        img = dl.download(args.source, args=args.query)
-        if callable(file):
-            file = file(img)
-        if download_file:
-            with open(file, "wb") as f:
-                f.write(dl.get(img))
-                print(file)
-        else:
-            print(img)
+    if (args.source == ''):
+        print("Usage: " + sys.argv[0] + " [-d/--download] [-f/--file ...] [-s/--source ...] [query]")
+        print("Where first ... is the file name you want, second ... is the source where source can be:")
+        sources = "\n".join("\n".join(v for v in source) for source in
+                            nsfw_dl.SOURCES.values())
+        print(sources)
+        print("And query is what you want to search for.")
+    else:
+        download_file = args.download
+        file = args.file
+        with nsfw_dl.NSFWDL() as dl:
+            img = dl.download(args.source, args=args.query)
+            if callable(file):
+                file = file(img)
+            if download_file:
+                with open(file, "wb") as f:
+                    f.write(dl.get(img))
+                    print(file)
+            else:
+                print(img)
 
 
 if __name__ == '__main__':
