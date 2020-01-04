@@ -28,8 +28,10 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
                        default='', nargs="*")
     args = image.parse_args(argv[1:])
     if (args.source == ''):
-        print("Usage: " + sys.argv[0] + " [-d/--download] [-f/--file ...] [-s/--source ...] [query]")
-        print("Where first ... is the file name you want, second ... is the source where source can be:")
+        print("Usage: " + sys.argv[0] + " [-d/--download] [-f/--file "
+              "...] [-s/--source ...] [query]")
+        print("Where first ... is the file name you want, second ... "
+              "is the source where source can be:")
         sources = "\n".join("\n".join(v for v in source) for source in
                             nsfw_dl.SOURCES.values())
         print(sources)
