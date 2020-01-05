@@ -29,8 +29,8 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
                        default='', nargs="*")
     args = image.parse_args(argv)
     if (args.source == ''):
-        print("Usage: " + os.path.basename(sys.argv[0]) + " [-d/--download] [-f/--file "
-              "...] [-s/--source ...] [query]")
+        print("Usage: " + os.path.basename(sys.argv[0]) + " [-d/--download]"
+              " [-f/--file ...] [-s/--source ...] [query]")
         print("Where first ... is the file name you want, second ... "
               "is the source where source can be:")
         sources = "\n".join("\n".join(v for v in source) for source in
