@@ -18,7 +18,7 @@ class LolibooruRandom:
     @staticmethod
     def get_image(data):
         """ ... """
-        return data.find(id="highres").get("href")
+        return data.find(id="highres-show").get("href")
 
 
 class LolibooruSearch(BaseSearchJSON):

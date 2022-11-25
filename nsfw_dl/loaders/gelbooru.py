@@ -2,7 +2,10 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+import random
+
 from nsfw_dl.bases import BaseSearchHTML
+from nsfw_dl.errors import NoResultsFound
 
 
 class GelbooruRandom:
@@ -33,3 +36,12 @@ class GelbooruSearch(BaseSearchHTML):
         """ .... """
         return ("https://www.gelbooru.com/index.php"
                 f"?page=post&s=list&tags={args}", {}, {})
+
+    @staticmethod
+    def get_image(data):
+        """ ... """
+        if data:
+            images = data.find_all(attrs="thumbnail-preview")
+            if images:
+                return random.choice(images).find("img").get("src")
+        raise NoResultsFound

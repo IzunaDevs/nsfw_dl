@@ -2,7 +2,11 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+import json
+import random
+
 from nsfw_dl.bases import BaseSearchJSON
+from nsfw_dl.errors import NoResultsFound
 
 
 class DanbooruRandom:
@@ -29,3 +33,10 @@ class DanbooruSearch(BaseSearchJSON):
     def prepare_url(args):
         """ ... """
         return f"https://danbooru.donmai.us/posts.json?tags={args}", {}, {}
+
+    @staticmethod
+    def get_image(data):
+        """ ... """
+        if data:
+            return random.choice(data)['source']
+        raise NoResultsFound
