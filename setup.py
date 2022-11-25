@@ -1,4 +1,3 @@
-from nsfw_dl import __version__
 from setuptools import setup, find_packages
 
 
@@ -18,7 +17,7 @@ setup(
     author='IzunaDevs',
     author_email='izunadevs@martmists.com',
     url='https://github.com/IzunaDevs/nsfw_dl',
-    version=__version__,
+    version='0.4.2',
     packages=find_packages(),
     license='MIT',
     description='Python 3 package for downloading nsfw images.',
