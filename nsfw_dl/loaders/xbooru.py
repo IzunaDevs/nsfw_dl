@@ -23,7 +23,7 @@ class XbooruRandom:
 
 class XbooruSearch(BaseSearchXML):
     """ Gets a random image with a specific tag from xbooru. """
-    data_format = "bs4/xml"
+    data_format = "xml"
 
     @staticmethod
     def prepare_url(args):

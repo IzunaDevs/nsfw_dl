@@ -23,7 +23,7 @@ class TbibRandom:
 
 class TbibSearch(BaseSearchXML):
     """ Gets a random image with a specific tag from tbib. """
-    data_format = "bs4/xml"
+    data_format = "xml"
 
     @staticmethod
     def prepare_url(args):

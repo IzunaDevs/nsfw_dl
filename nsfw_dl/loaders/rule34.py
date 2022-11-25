@@ -23,7 +23,7 @@ class Rule34Random:
 
 class Rule34Search(BaseSearchXML):
     """ Gets a random image with a specific tag from rule34. """
-    data_format = "bs4/xml"
+    data_format = "xml"
 
     @staticmethod
     def prepare_url(args):

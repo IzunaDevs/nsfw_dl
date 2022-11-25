@@ -13,7 +13,10 @@ class FurrybooruRandom:
     def prepare_url(args):
         """ ... """
         type(args)
-        return "http://furry.booru.org/index.php?page=post&s=random", {}, {}
+        # https://furry.booru.org/index.php?page=post&s=random
+        return ("https://furry.booru.org/index.php?page=post&s=random",
+                {},
+                {"User-Agent": "Mozilla/5.0 Firefox"})
 
     @staticmethod
     def get_image(data):
@@ -28,5 +31,6 @@ class FurrybooruSearch(BaseSearchHTML):
     @staticmethod
     def prepare_url(args):
         """ ... """
-        return ("http://furry.booru.org/index.php?page=post"
-                f"&s=list&tags={args}", {}, {})
+        return ("https://furry.booru.org/index.php?page=post"
+                f"&s=list&tags={args}", {},
+                {"User-Agent": "Mozilla/5.0 Firefox"})

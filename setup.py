@@ -3,8 +3,7 @@ from setuptools import setup, find_packages
 
 
 install_requires = [
-    'aiohttp>=2.2.0', 'beautifulsoup4>=4.6.0',
-    'lxml>=3.8.0']
+    'aiohttp>=2.2.0', 'beautifulsoup4>=4.6.0']
 
 
 try:

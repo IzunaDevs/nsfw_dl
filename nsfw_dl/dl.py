@@ -6,6 +6,7 @@ import importlib
 import io
 import json
 from urllib.parse import quote
+from xml.etree import ElementTree
 
 import aiohttp
 from bs4 import BeautifulSoup
@@ -109,8 +110,8 @@ class NSFWDL:
             if loader.data_format == "bs4/html":
                 reqdata = BeautifulSoup(await resp.text(), "html.parser")
 
-            elif loader.data_format == "bs4/xml":
-                reqdata = BeautifulSoup(await resp.text(), "lxml")
+            elif loader.data_format == "xml":
+                reqdata = ElementTree.fromstring(await resp.text())
 
             elif loader.data_format == "json":
                 reqdata = await resp.json(loads=self.json_loader)
@@ -146,8 +147,8 @@ class NSFWDL:
         if loader.data_format == "bs4/html":
             reqdata = BeautifulSoup(resp.text, "html.parser")
 
-        elif loader.data_format == "bs4/xml":
-            reqdata = BeautifulSoup(resp.text, "lxml")
+        elif loader.data_format == "xml":
+            reqdata = ElementTree.fromstring(resp.text)  # BeautifulSoup(resp.text, "lxml")
 
         elif loader.data_format == "json":
             reqdata = self.json_loader(resp.text)
@@ -169,6 +170,12 @@ class NSFWDL:
             return io.BytesIO(resp.content)
 
         return img_url
+
+    def xml_loader(self, text):
+        """
+        loads the xml file.
+        """
+        pass
 
     def download(self, name, args="", download=False):
         """

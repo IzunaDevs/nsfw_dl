@@ -2,24 +2,27 @@
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
+import random
+
 from nsfw_dl.bases import BaseSearchJSON
+from nsfw_dl.errors import NoResultsFound
 
 
 class E621Random:
     """ Gets a random image from e621. """
-    data_format = "bs4/html"
+    data_format = "json"
 
     @staticmethod
     def prepare_url(args):
         """ ... """
         type(args)
-        return ("https://e621.net/post/random", {},
+        return ("https://e621.net/posts/random.json?tags=", {},
                 {"User-Agent": "Mozilla/5.0 Firefox"})
 
     @staticmethod
     def get_image(data):
         """ ... """
-        return data.find(id="highres").get("href")
+        return data['post']['file']['url']
 
 
 class E621Search(BaseSearchJSON):
@@ -29,6 +32,13 @@ class E621Search(BaseSearchJSON):
     @staticmethod
     def prepare_url(args):
         """ ... """
-        return ("https://e621.net/post/index.json?page=dapi&s="
-                f"post&q=index&tags={args}", {},
+        return (f"https://e621.net/posts.json?tags={args}",
+                {},
                 {"User-Agent": "Mozilla/5.0 Firefox"})
+
+    @staticmethod
+    def get_image(data):
+        """ ... """
+        if data:
+            return random.choice(data['posts'])['file']['url']
+        raise NoResultsFound
