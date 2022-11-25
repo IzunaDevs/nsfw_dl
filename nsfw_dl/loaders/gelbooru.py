@@ -4,11 +4,11 @@ https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import random
 
-from nsfw_dl.bases import BaseSearchHTML
+from nsfw_dl.bases import BaseSearchHTML, BaseSearchXML
 from nsfw_dl.errors import NoResultsFound
 
 
-class GelbooruRandom:
+class GelbooruRandom(BaseSearchHTML):
     """ Gets a random image from gelbooru. """
     data_format = "bs4/html"
 
@@ -27,21 +27,22 @@ class GelbooruRandom:
             raise AttributeError(str(data))
 
 
-class GelbooruSearch(BaseSearchHTML):
+class GelbooruSearch(BaseSearchXML):
     """ Gets a random image with a specific tag from gelbooru. """
-    data_format = "bs4/html"
+    data_format = "xml"
 
     @staticmethod
     def prepare_url(args):
         """ .... """
         return ("https://www.gelbooru.com/index.php"
-                f"?page=post&s=list&tags={args}", {}, {})
+                f"?page=dapi&s=post&q=index&tags={args}", {}, {})
 
     @staticmethod
     def get_image(data):
         """ ... """
         if data:
-            images = data.find_all(attrs="thumbnail-preview")
-            if images:
-                return random.choice(images).find("img").get("src")
+            if int(data.get('count')) > 0:
+                imagelist = [tag.find('file_url').text for tag in data.findall(
+                    'post')]
+                return random.choice(imagelist)
         raise NoResultsFound

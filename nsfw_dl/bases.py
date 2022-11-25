@@ -20,7 +20,6 @@ class BaseSearchXML:
     def get_image(data):
         """ ... """
         if data:
-            print(f'count: {data.get("count")}')
             if int(data.get('count')) > 0:
                 imagelist = [tag.get('file_url') for tag in data.findall(
                     'post')]
