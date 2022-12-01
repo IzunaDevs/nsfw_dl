@@ -1,17 +1,18 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.8
 
 """
 Read the license at:
 https://github.com/IzunaDevs/nsfw_dl/blob/master/LICENSE
 """
 import argparse
+import asyncio
 import sys
 import os
 
 import nsfw_dl
 
 
-def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
+async def main(argv=None):  # pylint: disable=dangerous-default-value
     """
     Main entrypoint to nsfw_dl commandline.
     """
@@ -28,7 +29,7 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
     image.add_argument('query', help='Tags to use during search.',
                        default='', nargs="*")
     args = image.parse_args(argv)
-    if (args.source == ''):
+    if args.source == '':
         print("Usage: " + os.path.basename(sys.argv[0]) + " [-d/--download]"
               " [-f/--file ...] [-s/--source ...] [query]")
         print("Where first ... is the file name you want, second ... "
@@ -40,8 +41,8 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
     else:
         download_file = args.download
         file = args.file
-        with nsfw_dl.NSFWDL() as dl:
-            img = dl.download(args.source, args=" ".join(args.query))
+        async with nsfw_dl.NSFWDL() as dl:
+            img = await dl.download(args.source, args=" ".join(args.query))
             if callable(file):
                 file = file(img)
             if download_file:
@@ -53,4 +54,7 @@ def main(argv=sys.argv[1:]):  # pylint: disable=dangerous-default-value
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        asyncio.run(main(argv=sys.argv[1:]))
+    except KeyboardInterrupt:
+        pass
