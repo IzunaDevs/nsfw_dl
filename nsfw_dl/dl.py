@@ -35,9 +35,8 @@ class NSFWDL:
     Main class.
     """
     def __init__(self, loop=None, json_loader=json.loads):
-        self.async_ = None
         self.loop = loop
-        self.session = None
+        self.session: aiohttp.ClientSession | None = None
         self.json_loader = json_loader
         self.loaders = {}
         self.load_default()
@@ -62,7 +61,6 @@ class NSFWDL:
 
     async def __aexit__(self, *exc):
         await self.session.close()
-        self.session = None
         return
 
     def __enter__(self):
@@ -72,7 +70,6 @@ class NSFWDL:
         return
 
     def __del__(self):
-        self.session.close()
         self.session = None
 
     def __getattr__(self, item):
