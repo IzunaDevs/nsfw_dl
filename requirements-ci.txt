@@ -1,5 +1,5 @@
 aiohttp>=2.2.0
-beautifulsoup4>=4.6.0
+beautifulsoup4>=4.15.0
 flake8
 pytest
 pytest-asyncio
