@@ -1,4 +1,4 @@
-aiohttp>=2.2.0
+aiohttp>=3.14.1
 beautifulsoup4>=4.6.0
 flake8
 pytest
